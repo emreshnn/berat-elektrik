@@ -3,30 +3,66 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Berat Elektrik – Güvenlik · Kalite · Uzmanlık</title>
+  <title>Berat Elektrik – Ankara Elektrikçi | 7/24 Hizmet</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Berat Elektrik – Ankara'da güvenilir elektrik hizmetleri. Kamera kurulumu, avize montajı, elektrik arıza tesisat, uydu çanak. 7/24 acil servis. ☎ 0505 977 06 48" />
+  <meta name="keywords" content="elektrikçi ankara, kamera kurulumu ankara, avize montajı, elektrik arıza, uydu çanak kurulumu, elektrik tesisat ankara" />
+  <meta name="author" content="Berat Elektrik" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="Berat Elektrik – Ankara Elektrikçi | 7/24 Hizmet" />
+  <meta property="og:description" content="Ankara'da güvenilir elektrik hizmetleri. Kamera, avize, arıza, uydu çanak. 7/24 acil servis." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="tr_TR" />
+  <meta name="twitter:card" content="summary" />
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#090e1a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Berat Elektrik" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23090e1a'/%3E%3Cpolygon points='18,3 8,18 15,18 14,29 24,14 17,14' fill='%2300E5FF'/%3E%3C/svg%3E" />
+
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Berat Elektrik",
+    "description": "Ankara'da güvenilir elektrik hizmetleri.",
+    "telephone": "+905059770648",
+    "address": {"@type": "PostalAddress", "addressLocality": "Ankara", "addressCountry": "TR"},
+    "openingHoursSpecification": {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "00:00", "closes": "23:59"},
+    "areaServed": "Ankara"
+  }
+  </script>
+
   <style>
-    /* ═══════════════════════════════════════════
-       RESET & CSS VARIABLES
-    ═══════════════════════════════════════════ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --gold:   #FFD700;
-      --gold2:  #FFC200;
-      --gold3:  #E6A800;
-      --gold-dim: rgba(255,215,0,.12);
-      --black:  #080808;
-      --dark:   #0f0f0f;
-      --card:   #131313;
-      --card2:  #191919;
-      --border: #252525;
-      --border2: #333;
-      --text:   #ffffff;
-      --muted:  #777;
-      --green:  #25D366;
+      --cyan:      #00E5FF;
+      --cyan2:     #00CCEE;
+      --cyan3:     #0099BB;
+      --cyan-dim:  rgba(0,229,255,.12);
+      --blue:      #4477FF;
+      --purple:    #9944FF;
+      --black:     #090e1a;
+      --dark:      #0c1220;
+      --card:      #111827;
+      --card2:     #141d2b;
+      --border:    #1e2d42;
+      --border2:   #243550;
+      --text:      #ffffff;
+      --muted:     #6b7fa0;
+      --green:     #25D366;
       --nav-h-desktop: 72px;
       --nav-h-mobile:  64px;
     }
@@ -41,7 +77,6 @@
       overflow-x: hidden;
     }
 
-    /* noise texture */
     body::before {
       content: '';
       position: fixed; inset: 0;
@@ -51,806 +86,462 @@
 
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: var(--black); }
-    ::-webkit-scrollbar-thumb { background: var(--gold3); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb { background: var(--cyan3); border-radius: 3px; }
 
-    /* ═══════════════════════════════════════════
-       DESKTOP TOP NAVIGATION
-    ═══════════════════════════════════════════ */
+    /* ── TOP NAV ── */
     .top-nav {
-      display: none; /* hidden on mobile */
+      display: none;
       position: fixed; top: 0; left: 0; right: 0;
       height: var(--nav-h-desktop);
-      background: rgba(8,8,8,.92);
+      background: rgba(9,14,26,.94);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
       z-index: 200;
       align-items: center;
       padding: 0 48px;
     }
-
     .top-nav-inner {
-      max-width: 1280px;
-      width: 100%;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      max-width: 1280px; width: 100%; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
     }
-
-    .top-logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-    }
-
+    .top-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
     .top-logo-icon {
-      width: 42px; height: 42px;
-      border-radius: 50%;
-      border: 2px solid var(--gold);
-      background: radial-gradient(circle, #1f1800, #0a0800);
+      width: 42px; height: 42px; border-radius: 50%;
+      border: 2px solid var(--cyan);
+      background: radial-gradient(circle, #001f26, #000a0e);
       display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 0 16px rgba(255,215,0,.3);
+      box-shadow: 0 0 16px rgba(0,229,255,.3);
       animation: pulse-logo 3s ease-in-out infinite;
     }
     .top-logo-icon svg { width: 20px; height: 20px; }
-
     @keyframes pulse-logo {
-      0%,100% { box-shadow: 0 0 16px rgba(255,215,0,.3); }
-      50%      { box-shadow: 0 0 28px rgba(255,215,0,.5); }
+      0%,100% { box-shadow: 0 0 16px rgba(0,229,255,.3); }
+      50%      { box-shadow: 0 0 28px rgba(0,229,255,.5); }
     }
-
     .top-logo-text { display: flex; flex-direction: column; line-height: 1; }
-    .top-logo-text .t1 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.5rem; letter-spacing: 3px; color: #fff;
-    }
-    .top-logo-text .t2 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.5rem; letter-spacing: 4px; color: var(--gold);
-      text-shadow: 0 0 14px rgba(255,215,0,.4);
-      margin-top: -3px;
-    }
-
-    .top-nav-links {
-      display: flex; gap: 8px; list-style: none;
-    }
-
+    .top-logo-text .t1 { font-family: 'Bebas Neue',sans-serif; font-size: 1.5rem; letter-spacing: 3px; color: #fff; }
+    .top-logo-text .t2 { font-family: 'Bebas Neue',sans-serif; font-size: 1.5rem; letter-spacing: 4px; color: var(--cyan); text-shadow: 0 0 14px rgba(0,229,255,.4); margin-top: -3px; }
+    .top-nav-links { display: flex; gap: 8px; list-style: none; }
     .top-nav-links a {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: .82rem; font-weight: 700;
-      letter-spacing: 1.5px;
-      color: var(--muted);
-      text-decoration: none;
-      padding: 8px 16px;
-      border-radius: 8px;
-      transition: color .2s, background .2s;
+      font-family: 'Rajdhani',sans-serif; font-size: .82rem; font-weight: 700;
+      letter-spacing: 1.5px; color: var(--muted); text-decoration: none;
+      padding: 8px 16px; border-radius: 8px; transition: color .2s, background .2s;
     }
     .top-nav-links a:hover,
-    .top-nav-links a.active { color: var(--gold); background: var(--gold-dim); }
+    .top-nav-links a.active { color: var(--cyan); background: var(--cyan-dim); }
+    .top-nav-cta { background: var(--cyan); color: #000 !important; border-radius: 8px; font-weight: 700; }
+    .top-nav-cta:hover { background: var(--cyan2) !important; color: #000 !important; }
 
-    .top-nav-cta {
-      background: var(--gold);
-      color: #000 !important;
-      border-radius: 8px;
-      font-weight: 700;
-    }
-    .top-nav-cta:hover { background: var(--gold2) !important; color: #000 !important; }
+    /* ── PAGE WRAPPER ── */
+    .page { position: relative; z-index: 1; padding-bottom: var(--nav-h-mobile); }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
 
-    /* ═══════════════════════════════════════════
-       PAGE WRAPPER
-    ═══════════════════════════════════════════ */
-    .page {
-      position: relative; z-index: 1;
-      padding-bottom: var(--nav-h-mobile); /* space for mobile bottom nav */
-    }
-
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* ═══════════════════════════════════════════
-       HERO
-    ═══════════════════════════════════════════ */
+    /* ── HERO ── */
     .hero {
-      background: linear-gradient(160deg, #1a1200 0%, #0d0b00 35%, var(--black) 70%);
+      background: linear-gradient(160deg, #001826 0%, #050d18 35%, var(--black) 70%);
       padding: 36px 24px 40px;
-      position: relative;
-      overflow: hidden;
+      position: relative; overflow: hidden;
     }
-
-    /* city silhouette */
     .hero::after {
       content: '';
       position: absolute; bottom: 0; left: 0; right: 0; height: 70px;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 70'%3E%3Cpath fill='%230f0f0f' d='M0,70 L0,50 L40,50 L40,38 L60,38 L60,28 L80,28 L80,38 L110,38 L110,18 L130,18 L130,10 L150,10 L150,18 L175,18 L175,38 L200,38 L200,45 L240,45 L240,32 L260,32 L260,20 L280,20 L280,32 L305,32 L305,45 L330,45 L330,28 L350,28 L350,14 L365,14 L365,28 L390,28 L390,38 L420,38 L420,45 L460,45 L460,32 L480,32 L480,22 L495,22 L495,32 L520,32 L520,45 L550,45 L550,35 L570,35 L570,22 L585,22 L585,35 L610,35 L610,45 L640,45 L640,30 L660,30 L660,18 L675,18 L675,30 L700,30 L700,42 L730,42 L730,30 L750,30 L750,18 L760,18 L760,30 L785,30 L785,42 L810,42 L810,50 L840,50 L840,38 L860,38 L860,25 L875,25 L875,38 L900,38 L900,50 L930,50 L930,38 L950,38 L950,26 L965,26 L965,38 L990,38 L990,48 L1020,48 L1020,36 L1040,36 L1040,22 L1055,22 L1055,36 L1080,36 L1080,48 L1110,48 L1110,38 L1130,38 L1130,28 L1145,28 L1145,38 L1170,38 L1170,50 L1200,50 L1200,70 Z'/%3E%3C/svg%3E") center bottom / cover no-repeat;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 70'%3E%3Cpath fill='%230c1220' d='M0,70 L0,50 L40,50 L40,38 L60,38 L60,28 L80,28 L80,38 L110,38 L110,18 L130,18 L130,10 L150,10 L150,18 L175,18 L175,38 L200,38 L200,45 L240,45 L240,32 L260,32 L260,20 L280,20 L280,32 L305,32 L305,45 L330,45 L330,28 L350,28 L350,14 L365,14 L365,28 L390,28 L390,38 L420,38 L420,45 L460,45 L460,32 L480,32 L480,22 L495,22 L495,32 L520,32 L520,45 L550,45 L550,35 L570,35 L570,22 L585,22 L585,35 L610,35 L610,45 L640,45 L640,30 L660,30 L660,18 L675,18 L675,30 L700,30 L700,42 L730,42 L730,30 L750,30 L750,18 L760,18 L760,30 L785,30 L785,42 L810,42 L810,50 L840,50 L840,38 L860,38 L860,25 L875,25 L875,38 L900,38 L900,50 L930,50 L930,38 L950,38 L950,26 L965,26 L965,38 L990,38 L990,48 L1020,48 L1020,36 L1040,36 L1040,22 L1055,22 L1055,36 L1080,36 L1080,48 L1110,48 L1110,38 L1130,38 L1130,28 L1145,28 L1145,38 L1170,38 L1170,50 L1200,50 L1200,70 Z'/%3E%3C/svg%3E") center bottom / cover no-repeat;
       pointer-events: none; opacity: .8;
     }
-
     .hero-glow {
-      position: absolute; top: -60px; left: 50%;
-      transform: translateX(-50%);
+      position: absolute; top: -60px; left: 50%; transform: translateX(-50%);
       width: 600px; height: 300px;
-      background: radial-gradient(ellipse, rgba(255,215,0,.14) 0%, transparent 65%);
+      background: radial-gradient(ellipse, rgba(0,229,255,.1) 0%, transparent 65%);
       pointer-events: none;
     }
+    .hero-inner { position: relative; z-index: 2; max-width: 1280px; margin: 0 auto; }
 
-    .hero-inner {
-      position: relative; z-index: 2;
-      max-width: 1280px; margin: 0 auto;
-    }
-
-    /* ── Mobile hero layout ── */
-    .hero-top-mobile {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-    }
-
-    .logo-block {
-      display: flex; align-items: center; gap: 14px;
-    }
-
+    /* Mobile hero */
+    .hero-top-mobile { display: flex; justify-content: space-between; align-items: flex-start; }
+    .logo-block { display: flex; align-items: center; gap: 14px; }
     .logo-icon {
-      width: 64px; height: 64px;
-      border-radius: 50%;
-      border: 2.5px solid var(--gold);
-      background: radial-gradient(circle, #1f1800, #0d0d00);
+      width: 64px; height: 64px; border-radius: 50%;
+      border: 2.5px solid var(--cyan);
+      background: radial-gradient(circle, #001f26, #000d10);
       display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 0 20px rgba(255,215,0,.35), inset 0 0 12px rgba(255,215,0,.1);
+      box-shadow: 0 0 20px rgba(0,229,255,.35), inset 0 0 12px rgba(0,229,255,.1);
       animation: pulse-logo 3s ease-in-out infinite;
       flex-shrink: 0;
     }
     .logo-icon svg { width: 32px; height: 32px; }
-
     .logo-text-block { display: flex; flex-direction: column; }
-    .logo-berat {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 2.6rem; letter-spacing: 4px; line-height: 1;
-      color: var(--text);
-    }
-    .logo-elektrik {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 2.6rem; letter-spacing: 6px; line-height: 1;
-      color: var(--gold); text-shadow: 0 0 20px rgba(255,215,0,.5);
-      margin-top: -4px;
-    }
-    .logo-slogan {
-      font-size: .7rem; font-weight: 600; letter-spacing: 2px; color: var(--muted);
-      margin-top: 4px;
-    }
+    .logo-berat  { font-family: 'Bebas Neue',sans-serif; font-size: 2.6rem; letter-spacing: 4px; line-height: 1; color: var(--text); }
+    .logo-elektrik { font-family: 'Bebas Neue',sans-serif; font-size: 2.6rem; letter-spacing: 6px; line-height: 1; color: var(--cyan); text-shadow: 0 0 20px rgba(0,229,255,.5); margin-top: -4px; }
+    .logo-slogan { font-size: .7rem; font-weight: 600; letter-spacing: 2px; color: var(--muted); margin-top: 4px; }
 
-    .badge-guvenli {
-      display: flex; flex-direction: column; align-items: center; gap: 4px;
-    }
-    .badge-shield svg {
-      width: 52px; height: 56px;
-      filter: drop-shadow(0 0 8px rgba(255,215,0,.4));
-    }
-    .badge-text {
-      font-size: .65rem; font-weight: 700; letter-spacing: 1.5px;
-      color: var(--gold); text-align: center;
-    }
+    .badge-guvenli { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .badge-shield svg { width: 52px; height: 56px; filter: drop-shadow(0 0 8px rgba(0,229,255,.4)); }
+    .badge-text { font-size: .65rem; font-weight: 700; letter-spacing: 1.5px; color: var(--cyan); text-align: center; }
 
-    /* ── Desktop hero layout ── */
+    /* Desktop hero */
     .hero-top-desktop { display: none; }
 
-    /* ══ OSİLOSKOP PANELİ ══ */
+    /* ── OSİLOSKOP ── */
     .elec-panel {
       margin-top: 20px;
-      background: #050d05;
-      border: 1.5px solid #1c2e1c;
-      border-radius: 14px;
-      overflow: hidden;
-      position: relative;
-      box-shadow: 0 0 24px rgba(80,200,80,.06), inset 0 0 40px rgba(0,0,0,.5);
+      background: #030b0f;
+      border: 1.5px solid #0a2030;
+      border-radius: 14px; overflow: hidden; position: relative;
+      box-shadow: 0 0 24px rgba(0,229,255,.06), inset 0 0 40px rgba(0,0,0,.5);
     }
     .elec-panel-header {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 9px 16px 8px;
-      border-bottom: 1px solid #1c2e1c;
+      padding: 9px 16px 8px; border-bottom: 1px solid #0a2030;
       background: rgba(0,0,0,.3);
     }
-    .elec-panel-title {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: .62rem; font-weight: 700; letter-spacing: 2.5px;
-      color: #5cb85c;
-    }
+    .elec-panel-title { font-family: 'Rajdhani',sans-serif; font-size: .62rem; font-weight: 700; letter-spacing: 2.5px; color: var(--cyan3); }
     .elec-panel-right { display: flex; align-items: center; gap: 14px; }
     .elec-status { display: flex; align-items: center; gap: 5px; }
-    .elec-status-dot {
-      width: 6px; height: 6px; border-radius: 50%; background: #4f8;
-      animation: sdot 1.2s ease-in-out infinite;
-      box-shadow: 0 0 6px #4f8;
-    }
+    .elec-status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); animation: sdot 1.2s ease-in-out infinite; box-shadow: 0 0 6px var(--cyan); }
     @keyframes sdot { 0%,100%{opacity:1} 50%{opacity:.2} }
-    .elec-status-txt {
-      font-family: 'Rajdhani',sans-serif; font-size:.58rem; font-weight:700;
-      letter-spacing:2px; color:#4f8;
-    }
-    .elec-freq-badge {
-      font-family:'Bebas Neue',sans-serif; font-size:.9rem; letter-spacing:1px;
-      color:#5af; text-shadow:0 0 8px rgba(85,170,255,.5);
-    }
+    .elec-status-txt { font-family: 'Rajdhani',sans-serif; font-size:.58rem; font-weight:700; letter-spacing:2px; color: var(--cyan); }
+    .elec-freq-badge { font-family:'Bebas Neue',sans-serif; font-size:.9rem; letter-spacing:1px; color: var(--blue); text-shadow:0 0 8px rgba(68,119,255,.5); }
     .elec-canvas-area { position: relative; height: 100px; }
     #scopeCanvas { display:block; width:100%; height:100%; }
     .elec-panel-footer {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 8px 16px 9px;
-      border-top: 1px solid #1c2e1c;
-      background: rgba(0,0,0,.3);
-      flex-wrap: wrap; gap: 6px;
+      padding: 8px 16px 9px; border-top: 1px solid #0a2030;
+      background: rgba(0,0,0,.3); flex-wrap: wrap; gap: 6px;
     }
     .elec-readouts { display:flex; gap:20px; align-items:center; }
-    .elec-readout { display:flex; flex-direction:column; align-items:center; gap:0; }
-    .elec-readout-val {
-      font-family:'Bebas Neue',sans-serif; font-size:1.15rem; letter-spacing:1px;
-      color:#FFD700; text-shadow:0 0 12px rgba(255,215,0,.6);
-      line-height:1;
-    }
-    .elec-readout-lbl {
-      font-family:'Rajdhani',sans-serif; font-size:.52rem; font-weight:700;
-      letter-spacing:1.5px; color:#3a6a3a; margin-top:1px;
-    }
+    .elec-readout { display:flex; flex-direction:column; align-items:center; }
+    .elec-readout-val { font-family:'Bebas Neue',sans-serif; font-size:1.15rem; letter-spacing:1px; color: var(--cyan); text-shadow:0 0 12px rgba(0,229,255,.6); line-height:1; }
+    .elec-readout-lbl { font-family:'Rajdhani',sans-serif; font-size:.52rem; font-weight:700; letter-spacing:1.5px; color:#1a4060; margin-top:1px; }
     .elec-channels { display:flex; gap:10px; align-items:center; }
     .elec-ch { display:flex; align-items:center; gap:5px; }
     .elec-ch-line { width:14px; height:2.5px; border-radius:2px; }
-    .elec-ch-lbl {
-      font-family:'Rajdhani',sans-serif; font-size:.6rem; font-weight:700;
-      letter-spacing:1px; color:var(--muted);
-    }
+    .elec-ch-lbl { font-family:'Rajdhani',sans-serif; font-size:.6rem; font-weight:700; letter-spacing:1px; color: var(--muted); }
 
-    /* ══ DEVRE KARTI ARKA PLAN ══ */
-    .circuit-bg {
-      position: absolute; inset: 0;
-      pointer-events: none; z-index: 1;
-      overflow: hidden;
-    }
+    /* ── DEVRE KARTI ── */
+    .circuit-bg { position: absolute; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; }
     #circuitCanvas { width:100%; height:100%; display:block; }
 
-    /* ══ GALERİ SERVİS KARTLARI ══ */
-    .gallery-cards {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-    .gcard {
-      background: var(--card2);
-      border: 1.5px solid var(--border);
-      border-radius: 14px;
-      overflow: hidden;
-      cursor: pointer;
-      transition: border-color .25s, transform .2s, box-shadow .25s;
-    }
-    .gcard:hover {
-      border-color: var(--gold2);
-      transform: translateY(-3px);
-      box-shadow: 0 10px 28px rgba(255,215,0,.12);
-    }
-    .gcard-img {
-      height: 100px;
-      display: flex; align-items: center; justify-content: center;
-      position: relative; overflow: hidden;
-    }
-    .gcard-img::after {
-      content: '';
-      position: absolute; bottom: 0; left: 0; right: 0; height: 30px;
-      background: linear-gradient(transparent, var(--card2));
-    }
-    .gcard-body { padding: 10px 12px 12px; }
-    .gcard-title {
-      font-family: 'Oswald', sans-serif;
-      font-size: .82rem; font-weight: 700; letter-spacing: 1.5px;
-      color: var(--text); margin-bottom: 3px;
-    }
-    .gcard-desc {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: .72rem; font-weight: 500; color: var(--muted);
-      letter-spacing: .5px; line-height: 1.3;
-    }
-    .gcard-tag {
-      display: inline-block;
-      margin-top: 6px;
-      background: rgba(255,215,0,.1);
-      border: 1px solid rgba(255,215,0,.2);
-      color: var(--gold);
-      font-family: 'Rajdhani', sans-serif;
-      font-size: .58rem; font-weight: 700; letter-spacing: 1.5px;
-      padding: 2px 8px; border-radius: 20px;
-    }
-
-    /* price banner */
-    .price-banner {
-      margin-top: 22px;
-      background: var(--card);
-      border: 1.5px solid var(--border);
-      border-radius: 14px;
-      padding: 16px 22px;
-      display: flex; align-items: center; gap: 14px;
-      position: relative; overflow: hidden;
-      animation: slide-in .5s ease both;
-    }
-    @keyframes slide-in {
-      from { opacity: 0; transform: translateY(12px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .price-banner::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(90deg, transparent, rgba(255,215,0,.04), transparent);
-      background-size: 200% 100%;
-      animation: shimmer 3s linear infinite;
-    }
-    @keyframes shimmer {
-      0%   { background-position: -200% 0; }
-      100% { background-position: 200% 0; }
-    }
-    .price-lira {
-      width: 44px; height: 44px; border-radius: 10px;
-      background: rgba(255,215,0,.1); border: 1px solid rgba(255,215,0,.22);
-      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-    }
-    .price-lira svg { width: 24px; height: 24px; }
-    .price-label {
-      font-family: 'Oswald', sans-serif;
-      font-size: 1rem; font-weight: 600; letter-spacing: 2px; flex: 1;
-    }
-    .price-amount {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 2rem; letter-spacing: 2px;
-      color: var(--gold); text-shadow: 0 0 16px rgba(255,215,0,.5);
-      white-space: nowrap;
-    }
-
-    /* ═══════════════════════════════════════════
-       SECTION LAYOUT
-    ═══════════════════════════════════════════ */
+    /* ── SECTION ── */
     .section { padding: 48px 24px; }
     .section-sm { padding: 32px 24px; }
-
     .section-title {
-      display: flex; align-items: center;
-      justify-content: center; gap: 16px;
-      margin-bottom: 28px;
+      display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 28px;
     }
     .section-title::before,
-    .section-title::after {
-      content: ''; flex: 1; height: 1.5px;
-      background: linear-gradient(90deg, transparent, var(--gold3));
-    }
-    .section-title::after {
-      background: linear-gradient(90deg, var(--gold3), transparent);
-    }
-    .section-title h2 {
-      font-family: 'Oswald', sans-serif;
-      font-size: 1.3rem; font-weight: 700;
-      letter-spacing: 4px; white-space: nowrap;
-    }
+    .section-title::after { content: ''; flex: 1; height: 1.5px; background: linear-gradient(90deg, transparent, var(--cyan3)); }
+    .section-title::after { background: linear-gradient(90deg, var(--cyan3), transparent); }
+    .section-title h2 { font-family: 'Oswald',sans-serif; font-size: 1.3rem; font-weight: 700; letter-spacing: 4px; white-space: nowrap; }
+    .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); margin: 0 24px; }
 
-    .divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--border), transparent);
-      margin: 0 24px;
-    }
-
-    /* ═══════════════════════════════════════════
-       SERVICES
-    ═══════════════════════════════════════════ */
-    .services-grid-top {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-    .services-grid-bottom {
+    /* ── SERVİS KARTLARI ── */
+    .services-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 12px;
-      margin-top: 12px;
     }
-
     .service-card {
-      background: var(--card2);
-      border: 1.5px solid var(--border);
-      border-radius: 16px;
-      padding: 22px 14px 18px;
-      display: flex; flex-direction: column;
-      align-items: center; gap: 12px;
-      text-align: center; cursor: pointer;
+      background: var(--card2); border: 1.5px solid var(--border); border-radius: 16px;
+      padding: 22px 14px 18px; display: flex; flex-direction: column;
+      align-items: center; gap: 12px; text-align: center; cursor: pointer;
       position: relative; overflow: hidden;
       transition: border-color .25s, transform .2s, box-shadow .25s;
     }
     .service-card::after {
-      content: '';
-      position: absolute; bottom: 0; left: 50%;
-      transform: translateX(-50%);
-      width: 36%; height: 2px;
-      background: var(--gold3); border-radius: 2px; opacity: .6;
+      content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 36%; height: 2px; background: var(--cyan3); border-radius: 2px; opacity: .6;
     }
-    .service-card:hover {
-      border-color: var(--gold2);
-      transform: translateY(-4px);
-      box-shadow: 0 10px 32px rgba(255,215,0,.14);
-    }
-
+    .service-card:hover { border-color: var(--cyan2); transform: translateY(-4px); box-shadow: 0 10px 32px rgba(0,229,255,.12); }
     .service-icon {
-      width: 58px; height: 58px;
-      background: rgba(255,215,0,.07);
-      border: 1.5px solid rgba(255,215,0,.18);
-      border-radius: 14px;
+      width: 58px; height: 58px; background: rgba(0,229,255,.07);
+      border: 1.5px solid rgba(0,229,255,.18); border-radius: 14px;
       display: flex; align-items: center; justify-content: center;
       transition: background .25s;
     }
-    .service-card:hover .service-icon { background: rgba(255,215,0,.15); }
+    .service-card:hover .service-icon { background: rgba(0,229,255,.15); }
     .service-icon svg { width: 30px; height: 30px; }
+    .service-name { font-size: .78rem; font-weight: 700; letter-spacing: 1px; line-height: 1.35; }
 
-    .service-name {
-      font-size: .78rem; font-weight: 700;
-      letter-spacing: 1px; line-height: 1.35;
+    /* ── GALERİ KARTLARI ── */
+    .gallery-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .gcard {
+      background: var(--card2); border: 1.5px solid var(--border); border-radius: 14px;
+      overflow: hidden; cursor: pointer;
+      transition: border-color .25s, transform .2s, box-shadow .25s;
+    }
+    .gcard:hover { border-color: var(--cyan2); transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,229,255,.12); }
+    .gcard-img { height: 100px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+    .gcard-img::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(transparent, var(--card2)); }
+    .gcard-body { padding: 10px 12px 12px; }
+    .gcard-title { font-family: 'Oswald',sans-serif; font-size: .82rem; font-weight: 700; letter-spacing: 1.5px; color: var(--text); margin-bottom: 3px; }
+    .gcard-desc { font-family: 'Rajdhani',sans-serif; font-size: .72rem; font-weight: 500; color: var(--muted); letter-spacing: .5px; line-height: 1.3; }
+    .gcard-tag {
+      display: inline-block; margin-top: 6px;
+      background: rgba(0,229,255,.1); border: 1px solid rgba(0,229,255,.2);
+      color: var(--cyan); font-family: 'Rajdhani',sans-serif;
+      font-size: .58rem; font-weight: 700; letter-spacing: 1.5px;
+      padding: 2px 8px; border-radius: 20px;
     }
 
-    .service-card.wide {
-      flex-direction: row; text-align: left;
-      padding: 20px 22px; gap: 16px;
-    }
-    .service-card.wide .service-icon { flex-shrink: 0; }
-    .service-card.wide .service-name { font-size: .88rem; }
-
-    /* ═══════════════════════════════════════════
-       GALLERY
-    ═══════════════════════════════════════════ */
-    .gallery-scroll {
-      display: flex; gap: 12px;
-      overflow-x: auto; padding-bottom: 6px;
-      scrollbar-width: none;
-    }
-    .gallery-scroll::-webkit-scrollbar { display: none; }
-
-    .gallery-item {
-      flex-shrink: 0;
-      width: 140px; height: 110px;
-      border-radius: 12px;
-      background: var(--card2);
-      border: 1.5px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 2.2rem; opacity: .55;
-      transition: opacity .2s, border-color .2s;
-      cursor: pointer;
-    }
-    .gallery-item:hover { opacity: 1; border-color: var(--gold3); }
-
-    .gallery-grid {
-      display: none; /* shown on desktop */
-      grid-template-columns: repeat(6, 1fr);
-      gap: 12px;
-    }
-    .gallery-grid .gallery-item {
-      width: 100%; height: 130px;
-    }
-
-    /* ═══════════════════════════════════════════
-       ABOUT
-    ═══════════════════════════════════════════ */
+    /* ── HAKKIMIZDA ── */
     .about-card {
-      background: var(--card2);
-      border: 1.5px solid var(--border);
-      border-radius: 18px;
-      padding: 28px 24px;
-      position: relative; overflow: hidden;
+      background: var(--card2); border: 1.5px solid var(--border); border-radius: 18px;
+      padding: 28px 24px; position: relative; overflow: hidden;
     }
     .about-card::before {
-      content: '';
-      position: absolute; top: -40px; right: -40px;
+      content: ''; position: absolute; top: -40px; right: -40px;
       width: 160px; height: 160px;
-      background: radial-gradient(circle, rgba(255,215,0,.07), transparent 70%);
+      background: radial-gradient(circle, rgba(0,229,255,.07), transparent 70%);
       pointer-events: none;
     }
-    .about-card p {
-      font-size: 1rem; font-weight: 500;
-      line-height: 1.8; color: #bbb;
-    }
-    .about-stats {
-      display: flex; gap: 0;
-      margin-top: 24px;
-      border-top: 1px solid var(--border); padding-top: 20px;
-    }
+    .about-card p { font-size: 1rem; font-weight: 500; line-height: 1.8; color: #9ab; }
+    .about-stats { display: flex; gap: 0; margin-top: 24px; border-top: 1px solid var(--border); padding-top: 20px; }
     .stat { flex: 1; text-align: center; }
     .stat + .stat { border-left: 1px solid var(--border); }
-    .stat-num {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 2.2rem; color: var(--gold); line-height: 1;
-    }
-    .stat-label {
-      font-size: .72rem; font-weight: 600;
-      letter-spacing: 1px; color: var(--muted); margin-top: 3px;
-    }
+    .stat-num { font-family: 'Bebas Neue',sans-serif; font-size: 2.2rem; color: var(--cyan); line-height: 1; }
+    .stat-label { font-size: .72rem; font-weight: 600; letter-spacing: 1px; color: var(--muted); margin-top: 3px; }
 
-    /* ═══════════════════════════════════════════
-       CONTACT
-    ═══════════════════════════════════════════ */
+    /* ── İLETİŞİM ── */
     .contact-list { display: flex; flex-direction: column; gap: 12px; }
-
     .contact-btn {
-      display: flex; align-items: center; gap: 16px;
-      padding: 18px 22px;
-      background: var(--card2);
-      border: 1.5px solid var(--border);
-      border-radius: 50px;
-      text-decoration: none;
-      transition: border-color .2s, transform .15s, box-shadow .2s;
+      display: flex; align-items: center; gap: 16px; padding: 18px 22px;
+      background: var(--card2); border: 1.5px solid var(--border); border-radius: 50px;
+      text-decoration: none; transition: border-color .2s, transform .15s, box-shadow .2s;
       position: relative; overflow: hidden;
     }
     .contact-btn::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(90deg, transparent, rgba(255,215,0,.04), transparent);
-      transform: translateX(-110%);
-      transition: transform .45s ease;
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(0,229,255,.04), transparent);
+      transform: translateX(-110%); transition: transform .45s ease;
     }
     .contact-btn:hover::before { transform: translateX(110%); }
-    .contact-btn:hover {
-      border-color: var(--gold2); transform: scale(1.01);
-    }
-    .contact-btn.whatsapp:hover {
-      border-color: var(--green);
-      box-shadow: 0 0 24px rgba(37,211,102,.14);
-    }
-    .contact-icon {
-      width: 44px; height: 44px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .phone-icon { background: rgba(255,215,0,.09); border: 1px solid rgba(255,215,0,.22); }
+    .contact-btn:hover { border-color: var(--cyan2); transform: scale(1.01); }
+    .contact-btn.whatsapp:hover { border-color: var(--green); box-shadow: 0 0 24px rgba(37,211,102,.14); }
+    .contact-icon { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .phone-icon { background: rgba(0,229,255,.09); border: 1px solid rgba(0,229,255,.22); }
     .wa-icon    { background: rgba(37,211,102,.1);  border: 1px solid rgba(37,211,102,.28); }
     .contact-icon svg { width: 22px; height: 22px; }
-    .contact-num {
-      font-family: 'Oswald', sans-serif;
-      font-size: 1.1rem; font-weight: 600;
-      letter-spacing: 2px; flex: 1;
-    }
+    .contact-num { font-family: 'Oswald',sans-serif; font-size: 1.1rem; font-weight: 600; letter-spacing: 2px; flex: 1; }
     .contact-btn.whatsapp .contact-num { font-size: .92rem; letter-spacing: 1.5px; }
     .contact-chevron { opacity: .3; flex-shrink: 0; }
 
-    /* ═══════════════════════════════════════════
-       MOBILE BOTTOM NAV
-    ═══════════════════════════════════════════ */
+    /* Harita */
+    .contact-map-wrap {
+      margin-top: 16px; border-radius: 18px; overflow: hidden;
+      border: 1.5px solid var(--border); height: 220px;
+    }
+    .contact-map-wrap iframe { width: 100%; height: 100%; display: block; border: 0; filter: grayscale(40%) invert(90%) hue-rotate(180deg); }
+
+    /* ── İLETİŞİM FORMU ── */
+    .contact-form {
+      margin-top: 20px;
+      background: var(--card2); border: 1.5px solid var(--border);
+      border-radius: 18px; padding: 24px;
+    }
+    .contact-form h3 { font-family: 'Oswald',sans-serif; font-size: 1rem; letter-spacing: 2px; color: var(--cyan); margin-bottom: 16px; }
+    .form-group { margin-bottom: 14px; }
+    .form-group label { display: block; font-size: .72rem; font-weight: 700; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 6px; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%; background: var(--card); border: 1.5px solid var(--border);
+      border-radius: 10px; padding: 12px 14px; color: var(--text);
+      font-family: 'Rajdhani',sans-serif; font-size: .95rem; font-weight: 500;
+      transition: border-color .2s, box-shadow .2s; outline: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--cyan3); box-shadow: 0 0 0 3px rgba(0,229,255,.1); }
+    .form-group select option { background: var(--card); }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+    .form-submit {
+      width: 100%; padding: 14px; background: var(--cyan); color: #000;
+      border: none; border-radius: 50px; font-family: 'Oswald',sans-serif;
+      font-size: 1rem; font-weight: 700; letter-spacing: 2px; cursor: pointer;
+      transition: background .2s, transform .15s;
+    }
+    .form-submit:hover { background: var(--cyan2); transform: scale(1.01); }
+
+    /* ── MÜŞTERI YORUMLARI ── */
+    .reviews-grid { display: flex; flex-direction: column; gap: 14px; }
+    .review-card {
+      background: var(--card2); border: 1.5px solid var(--border); border-radius: 16px; padding: 20px;
+    }
+    .review-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+    .review-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue',sans-serif; font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .review-info { flex: 1; }
+    .review-name { font-family: 'Oswald',sans-serif; font-size: .9rem; font-weight: 600; letter-spacing: 1px; }
+    .review-stars { color: var(--cyan); font-size: .7rem; letter-spacing: 2px; margin-top: 2px; }
+    .review-date { font-size: .65rem; color: var(--muted); }
+    .review-text { font-size: .88rem; font-weight: 500; color: #9ab; line-height: 1.6; }
+
+    /* ── SSS ── */
+    .faq-list { display: flex; flex-direction: column; gap: 10px; }
+    .faq-item { background: var(--card2); border: 1.5px solid var(--border); border-radius: 14px; overflow: hidden; }
+    .faq-q {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 20px; cursor: pointer;
+      font-family: 'Oswald',sans-serif; font-size: .9rem; font-weight: 600; letter-spacing: 1px;
+      transition: color .2s;
+    }
+    .faq-q:hover { color: var(--cyan); }
+    .faq-icon { font-size: 1.2rem; color: var(--cyan); transition: transform .3s; flex-shrink: 0; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-a {
+      max-height: 0; overflow: hidden; transition: max-height .35s ease, padding .35s ease;
+      font-size: .88rem; font-weight: 500; color: #9ab; line-height: 1.7;
+      padding: 0 20px;
+    }
+    .faq-item.open .faq-a { max-height: 200px; padding: 0 20px 16px; }
+
+    /* ── FLOATING WHATSAPP ── */
+    .float-wa {
+      position: fixed; bottom: 80px; right: 18px; z-index: 300;
+      width: 52px; height: 52px; border-radius: 50%;
+      background: var(--green); display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,.4);
+      animation: wa-pulse 2.5s ease-in-out infinite;
+      text-decoration: none;
+    }
+    .float-wa svg { width: 28px; height: 28px; }
+    @keyframes wa-pulse {
+      0%,100% { box-shadow: 0 4px 20px rgba(37,211,102,.4); }
+      50%      { box-shadow: 0 4px 32px rgba(37,211,102,.7); }
+    }
+    @media (min-width: 1024px) { .float-wa { bottom: 32px; right: 32px; } }
+
+    /* ── KVKK BANNER ── */
+    .kvkk-banner {
+      position: fixed; bottom: 70px; left: 12px; right: 12px; z-index: 400;
+      background: var(--card); border: 1.5px solid var(--border); border-radius: 14px;
+      padding: 14px 16px; display: flex; align-items: center; gap: 12px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.6);
+    }
+    .kvkk-banner p { font-size: .75rem; font-weight: 500; color: #9ab; flex: 1; line-height: 1.5; }
+    .kvkk-btn {
+      padding: 8px 16px; border-radius: 8px; font-family: 'Oswald',sans-serif;
+      font-size: .75rem; font-weight: 700; letter-spacing: 1px; cursor: pointer; border: none;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .kvkk-accept { background: var(--cyan); color: #000; }
+    .kvkk-reject { background: var(--border); color: var(--muted); margin-left: 6px; }
+    @media (min-width: 1024px) { .kvkk-banner { bottom: 24px; max-width: 600px; left: 50%; transform: translateX(-50%); } }
+
+    /* ── BOTTOM NAV ── */
     .bottom-nav {
       position: fixed; bottom: 0; left: 0; right: 0;
       height: var(--nav-h-mobile);
-      background: rgba(8,8,8,.96);
-      backdrop-filter: blur(20px);
+      background: rgba(9,14,26,.96); backdrop-filter: blur(20px);
       border-top: 1px solid var(--border);
       display: flex; justify-content: space-around; align-items: center;
-      padding: 0 8px 6px;
-      z-index: 200;
+      padding: 0 8px 6px; z-index: 200;
     }
     .nav-item {
-      display: flex; flex-direction: column;
-      align-items: center; gap: 3px;
-      text-decoration: none; padding: 6px 10px;
-      border-radius: 10px; opacity: .45;
-      transition: opacity .2s;
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
+      text-decoration: none; padding: 6px 10px; border-radius: 10px;
+      opacity: .45; transition: opacity .2s;
     }
     .nav-item.active { opacity: 1; }
     .nav-item:hover  { opacity: .8; }
     .nav-item svg { width: 22px; height: 22px; }
-    .nav-item span {
-      font-size: .58rem; font-weight: 700;
-      letter-spacing: 1px; color: var(--gold);
-    }
+    .nav-item span { font-size: .58rem; font-weight: 700; letter-spacing: 1px; color: var(--cyan); }
 
-    /* ═══════════════════════════════════════════
-       FOOTER
-    ═══════════════════════════════════════════ */
+    /* ── FOOTER ── */
     .footer {
-      display: none; /* shown on desktop */
-      background: var(--dark);
-      border-top: 1px solid var(--border);
-      padding: 32px 48px;
-      text-align: center;
+      display: none; background: var(--dark); border-top: 1px solid var(--border);
+      padding: 32px 48px; text-align: center;
     }
     .footer-inner {
       max-width: 1280px; margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 16px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
     }
-    .footer-logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.4rem; letter-spacing: 3px;
-    }
-    .footer-logo span { color: var(--gold); }
+    .footer-logo { font-family: 'Bebas Neue',sans-serif; font-size: 1.4rem; letter-spacing: 3px; }
+    .footer-logo span { color: var(--cyan); }
     .footer-links { display: flex; gap: 24px; list-style: none; }
-    .footer-links a {
-      font-size: .8rem; font-weight: 600; letter-spacing: 1px;
-      color: var(--muted); text-decoration: none;
-      transition: color .2s;
-    }
-    .footer-links a:hover { color: var(--gold); }
-    .footer-copy {
-      font-size: .75rem; color: var(--muted); letter-spacing: .5px;
-    }
+    .footer-links a { font-size: .8rem; font-weight: 600; letter-spacing: 1px; color: var(--muted); text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: var(--cyan); }
+    .footer-copy { font-size: .75rem; color: var(--muted); letter-spacing: .5px; }
 
-    /* ═══════════════════════════════════════════
-       ▸▸▸  DESKTOP BREAKPOINT (≥ 1024px)
-    ═══════════════════════════════════════════ */
+    /* ── DESKTOP ≥1024px ── */
     @media (min-width: 1024px) {
-
-      /* show top nav, hide bottom nav */
       .top-nav    { display: flex; }
       .bottom-nav { display: none; }
       .footer     { display: block; }
-
-      /* page offset for top nav */
       .page { padding-top: var(--nav-h-desktop); padding-bottom: 0; }
-
-      /* ── Hero desktop ── */
       .hero { padding: 80px 48px 90px; }
       .hero-glow { width: 900px; height: 500px; }
-
       .hero-top-mobile  { display: none; }
       .hero-top-desktop {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 40px;
+        display: flex; align-items: center; justify-content: space-between; gap: 40px;
       }
-
       .hero-left { flex: 1; }
-      .hero-headline {
-        font-family: 'Bebas Neue', sans-serif;
-        font-size: clamp(4rem, 7vw, 7rem);
-        letter-spacing: 6px; line-height: .95;
-      }
+      .hero-headline { font-family: 'Bebas Neue',sans-serif; font-size: clamp(4rem,7vw,7rem); letter-spacing: 6px; line-height: .95; }
       .hero-headline .h-white { color: #fff; display: block; }
-      .hero-headline .h-gold  { color: var(--gold); text-shadow: 0 0 40px rgba(255,215,0,.4); display: block; }
-      .hero-sub {
-        font-size: 1rem; font-weight: 600; letter-spacing: 3px;
-        color: var(--muted); margin-top: 14px;
-      }
-
-      .hero-right {
-        display: flex; flex-direction: column; align-items: flex-end; gap: 24px;
-      }
-
-      .hero-logo-big {
-        display: flex; align-items: center; gap: 20px;
-      }
+      .hero-headline .h-cyan  { color: var(--cyan); text-shadow: 0 0 40px rgba(0,229,255,.4); display: block; }
+      .hero-sub { font-size: 1rem; font-weight: 600; letter-spacing: 3px; color: var(--muted); margin-top: 14px; }
+      .hero-right { display: flex; flex-direction: column; align-items: flex-end; gap: 24px; }
+      .hero-logo-big { display: flex; align-items: center; gap: 20px; }
       .hero-logo-icon-big {
         width: 90px; height: 90px; border-radius: 50%;
-        border: 3px solid var(--gold);
-        background: radial-gradient(circle, #221900, #0a0800);
+        border: 3px solid var(--cyan);
+        background: radial-gradient(circle, #001f26, #000a0e);
         display: flex; align-items: center; justify-content: center;
-        box-shadow: 0 0 40px rgba(255,215,0,.35), inset 0 0 20px rgba(255,215,0,.1);
+        box-shadow: 0 0 40px rgba(0,229,255,.35), inset 0 0 20px rgba(0,229,255,.1);
         animation: pulse-logo 3s ease-in-out infinite;
       }
       .hero-logo-icon-big svg { width: 46px; height: 46px; }
-
-      .badge-desktop {
-        display: flex; flex-direction: column; align-items: center; gap: 6px;
-      }
-      .badge-desktop svg { width: 72px; height: 78px; filter: drop-shadow(0 0 12px rgba(255,215,0,.45)); }
+      .badge-desktop { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+      .badge-desktop svg { width: 72px; height: 78px; filter: drop-shadow(0 0 12px rgba(0,229,255,.45)); }
       .badge-desktop .badge-text { font-size: .8rem; letter-spacing: 2px; }
-
-      .price-banner {
-        margin-top: 32px;
-        max-width: 600px;
-        padding: 20px 28px;
-      }
-      .price-label { font-size: 1.1rem; }
-      .price-amount { font-size: 2.4rem; }
-
-      /* ── Container ── */
       .section    { padding: 64px 48px; max-width: 1280px; margin: 0 auto; }
       .section-sm { padding: 48px 48px; max-width: 1280px; margin: 0 auto; }
       .divider { margin: 0 48px; }
-
       .section-title h2 { font-size: 1.6rem; letter-spacing: 6px; }
-
-      /* ── Services desktop: all 5 in one row ── */
-      .services-grid-top {
-        grid-template-columns: repeat(5, 1fr);
-        gap: 14px;
-      }
-      .services-grid-bottom { display: none; }
-
-      /* move bottom services into top grid */
-      .service-card.wide {
-        flex-direction: column; text-align: center;
-        padding: 22px 14px 18px; gap: 12px;
-      }
-      .service-card.wide .service-name { font-size: .78rem; }
-
+      .services-grid { grid-template-columns: repeat(4, 1fr); gap: 14px; }
       .service-icon { width: 64px; height: 64px; border-radius: 16px; }
       .service-icon svg { width: 34px; height: 34px; }
       .service-name { font-size: .82rem; }
-
-      /* ── Gallery desktop ── */
-      .gallery-scroll { display: none; }
-      .gallery-grid   { display: grid; }
       .gallery-cards  { grid-template-columns: repeat(3, 1fr); }
       .gcard-img      { height: 120px; }
       .elec-panel     { margin-top: 32px; }
       .elec-canvas-area { height: 120px; }
-
-      /* ── About desktop ── */
-      .about-layout {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 32px;
-        align-items: start;
-      }
-      .about-card { height: 100%; }
+      .about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
       .about-stats { flex-direction: column; gap: 0; }
       .stat { padding: 20px 0; text-align: left; padding-left: 24px; }
       .stat + .stat { border-left: none; border-top: 1px solid var(--border); }
       .stat-num { font-size: 3rem; }
-      .stat-label { font-size: .8rem; }
-
-      /* ── Contact desktop ── */
-      .contact-layout {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 32px;
-        align-items: start;
-      }
-      .contact-list { gap: 14px; }
-      .contact-num { font-size: 1.2rem; }
-      .contact-map {
-        background: var(--card2);
-        border: 1.5px solid var(--border);
-        border-radius: 18px;
-        height: 100%;
-        min-height: 220px;
-        display: flex; flex-direction: column;
-        align-items: center; justify-content: center;
-        gap: 12px; padding: 32px;
-      }
-      .contact-map-icon { font-size: 3rem; opacity: .4; }
-      .contact-map p {
-        font-family: 'Rajdhani', sans-serif;
-        font-size: .9rem; font-weight: 600; letter-spacing: 1px;
-        color: var(--muted); text-align: center;
-      }
-      .contact-map-addr {
-        font-family: 'Oswald', sans-serif;
-        font-size: 1rem; color: var(--text);
-        letter-spacing: 1px; text-align: center;
-      }
+      .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+      .reviews-grid { display: grid; grid-template-columns: 1fr 1fr; }
     }
 
-    /* ═══════════════════════════════════════════
-       TABLET (768 – 1023px)
-    ═══════════════════════════════════════════ */
     @media (min-width: 768px) and (max-width: 1023px) {
       .hero { padding: 48px 32px 56px; }
       .logo-berat, .logo-elektrik { font-size: 3.2rem; }
-      .logo-icon { width: 80px; height: 80px; }
-      .logo-icon svg { width: 40px; height: 40px; }
-      .price-banner { margin-top: 28px; }
-
       .section, .section-sm { padding: 44px 32px; max-width: 900px; margin: 0 auto; }
-      .divider { margin: 0 32px; }
-
-      .services-grid-top { grid-template-columns: repeat(3, 1fr); }
-
-      .gallery-scroll .gallery-item { width: 160px; height: 130px; }
-
-      .contact-list { gap: 12px; }
+      .services-grid { grid-template-columns: repeat(4, 1fr); }
     }
   </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════
-     DESKTOP TOP NAVIGATION
-═══════════════════════════════════════════ -->
+<!-- KVKK Banner -->
+<div class="kvkk-banner" id="kvkk" style="display:none">
+  <p>Bu site, daha iyi bir deneyim sunmak için çerezler kullanmaktadır. <strong>KVKK</strong> kapsamında kişisel verileriniz işlenebilir.</p>
+  <button class="kvkk-btn kvkk-accept" id="kvkkAccept">Kabul Et</button>
+  <button class="kvkk-btn kvkk-reject" id="kvkkReject">Reddet</button>
+</div>
+
+<!-- DESKTOP TOP NAV -->
 <nav class="top-nav">
   <div class="top-nav-inner">
     <a href="#ana-sayfa" class="top-logo">
       <div class="top-logo-icon">
         <svg viewBox="0 0 32 32" fill="none">
-          <polygon points="18,3 8,18 15,18 14,29 24,14 17,14" fill="#FFD700" stroke="#FFC200" stroke-width="1"/>
+          <polygon points="18,3 8,18 15,18 14,29 24,14 17,14" fill="#00E5FF" stroke="#00CCEE" stroke-width="1"/>
         </svg>
       </div>
       <div class="top-logo-text">
@@ -858,7 +549,6 @@
         <span class="t2">ELEKTRİK</span>
       </div>
     </a>
-
     <ul class="top-nav-links">
       <li><a href="#ana-sayfa"  class="active" id="tnav-ana">ANA SAYFA</a></li>
       <li><a href="#hizmetler"  id="tnav-hiz">HİZMETLER</a></li>
@@ -869,12 +559,9 @@
   </div>
 </nav>
 
-<!-- ═══════════════════════════════════════════
-     PAGE
-═══════════════════════════════════════════ -->
 <div class="page">
 
-  <!-- ══ HERO ══ -->
+  <!-- HERO -->
   <header class="hero" id="ana-sayfa">
     <div class="hero-glow"></div>
     <div class="circuit-bg"><canvas id="circuitCanvas"></canvas></div>
@@ -885,7 +572,7 @@
         <div class="logo-block">
           <div class="logo-icon">
             <svg viewBox="0 0 32 32" fill="none">
-              <polygon points="18,3 8,18 15,18 14,29 24,14 17,14" fill="#FFD700" stroke="#FFC200" stroke-width="1"/>
+              <polygon points="18,3 8,18 15,18 14,29 24,14 17,14" fill="#00E5FF" stroke="#00CCEE" stroke-width="1"/>
             </svg>
           </div>
           <div class="logo-text-block">
@@ -898,8 +585,8 @@
           <div class="badge-shield">
             <svg viewBox="0 0 52 56" fill="none">
               <path d="M26 2L4 12V28C4 39.5 13.8 50.2 26 54C38.2 50.2 48 39.5 48 28V12L26 2Z"
-                    fill="rgba(255,215,0,0.08)" stroke="#FFD700" stroke-width="2"/>
-              <polygon points="29,16 21,28 27,28 25,40 33,28 27,28" fill="#FFD700"/>
+                    fill="rgba(0,229,255,0.08)" stroke="#00E5FF" stroke-width="2"/>
+              <polygon points="29,16 21,28 27,28 25,40 33,28 27,28" fill="#00E5FF"/>
             </svg>
           </div>
           <div class="badge-text">GÜVENLİ<br>HİZMET</div>
@@ -911,7 +598,7 @@
         <div class="hero-left">
           <div class="hero-headline">
             <span class="h-white">BERAT</span>
-            <span class="h-gold">ELEKTRİK</span>
+            <span class="h-cyan">ELEKTRİK</span>
           </div>
           <div class="hero-sub">GÜVENLİK · KALİTE · UZMANLIK</div>
         </div>
@@ -919,14 +606,14 @@
           <div class="hero-logo-big">
             <div class="hero-logo-icon-big">
               <svg viewBox="0 0 32 32" fill="none">
-                <polygon points="18,3 8,18 15,18 14,29 24,14 17,14" fill="#FFD700" stroke="#FFC200" stroke-width="1.5"/>
+                <polygon points="18,3 8,18 15,18 14,29 24,14 17,14" fill="#00E5FF" stroke="#00CCEE" stroke-width="1.5"/>
               </svg>
             </div>
             <div class="badge-desktop">
               <svg viewBox="0 0 52 56" fill="none">
                 <path d="M26 2L4 12V28C4 39.5 13.8 50.2 26 54C38.2 50.2 48 39.5 48 28V12L26 2Z"
-                      fill="rgba(255,215,0,0.08)" stroke="#FFD700" stroke-width="2"/>
-                <polygon points="29,16 21,28 27,28 25,40 33,28 27,28" fill="#FFD700"/>
+                      fill="rgba(0,229,255,0.08)" stroke="#00E5FF" stroke-width="2"/>
+                <polygon points="29,16 21,28 27,28 25,40 33,28 27,28" fill="#00E5FF"/>
               </svg>
               <div class="badge-text">GÜVENLİ HİZMET</div>
             </div>
@@ -934,7 +621,7 @@
         </div>
       </div>
 
-      <!-- Osiloskop Paneli -->
+      <!-- Osiloskop -->
       <div class="elec-panel">
         <div class="elec-panel-header">
           <span class="elec-panel-title">ELEKTRİK ANALİZÖRÜ · CANLI İZLEME</span>
@@ -965,23 +652,11 @@
             </div>
           </div>
           <div class="elec-channels">
-            <div class="elec-ch"><div class="elec-ch-line" style="background:#FFD700;box-shadow:0 0 4px #FFD700"></div><span class="elec-ch-lbl">L1</span></div>
-            <div class="elec-ch"><div class="elec-ch-line" style="background:#5af;box-shadow:0 0 4px #5af"></div><span class="elec-ch-lbl">L2</span></div>
-            <div class="elec-ch"><div class="elec-ch-line" style="background:#4f8;box-shadow:0 0 4px #4f8"></div><span class="elec-ch-lbl">L3</span></div>
+            <div class="elec-ch"><div class="elec-ch-line" style="background:#00E5FF;box-shadow:0 0 4px #00E5FF"></div><span class="elec-ch-lbl">L1</span></div>
+            <div class="elec-ch"><div class="elec-ch-line" style="background:#4477FF;box-shadow:0 0 4px #4477FF"></div><span class="elec-ch-lbl">L2</span></div>
+            <div class="elec-ch"><div class="elec-ch-line" style="background:#9944FF;box-shadow:0 0 4px #9944FF"></div><span class="elec-ch-lbl">L3</span></div>
           </div>
         </div>
-      </div>
-
-      <!-- Price banner (both) -->
-      <div class="price-banner">
-        <div class="price-lira">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M6 4h8a4 4 0 0 1 0 8H6l4 4"/>
-            <path d="M6 20h10"/><path d="M6 16h10"/>
-          </svg>
-        </div>
-        <div class="price-label">SERVİS ÜCRETİ</div>
-        <div class="price-amount">1000 TL</div>
       </div>
 
     </div>
@@ -989,31 +664,21 @@
 
   <div class="divider"></div>
 
-  <!-- ══ HİZMETLER ══ -->
+  <!-- HİZMETLER -->
   <section class="section" id="hizmetler">
     <div class="section-title"><h2>HİZMETLERİMİZ</h2></div>
 
-    <!-- top row: 3 (mobile) / 5 (desktop) -->
-    <div class="services-grid-top">
+    <div class="services-grid">
 
       <!-- KAMERA -->
       <div class="service-card" tabindex="0">
         <div class="service-icon">
-          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" width="32" height="32">
-            <!-- kamera gövdesi -->
-            <rect x="2" y="11" width="19" height="13" rx="2.5" fill="#FFD700"/>
-            <!-- lens dış -->
-            <circle cx="11" cy="17.5" r="4.5" fill="#1a1200"/>
-            <!-- lens iç -->
-            <circle cx="11" cy="17.5" r="2.5" fill="#2a2000"/>
-            <!-- lens parlaması -->
-            <circle cx="10" cy="16.5" r="1" fill="#FFD700" opacity=".5"/>
-            <!-- sağ üçgen fin -->
-            <polygon points="21,13 29,9 29,26 21,22" fill="#E6A800"/>
-            <!-- montaj direği -->
-            <rect x="9" y="5" width="4" height="7" rx="1.5" fill="#FFD700"/>
-            <!-- taban -->
-            <rect x="5" y="4" width="12" height="3" rx="1" fill="#E6A800"/>
+          <svg viewBox="0 0 32 32" fill="none" width="32" height="32">
+            <rect x="2" y="11" width="19" height="13" rx="2.5" fill="none" stroke="#00E5FF" stroke-width="1.8"/>
+            <circle cx="11" cy="17.5" r="4.5" stroke="#00E5FF" stroke-width="1.5" fill="none"/>
+            <circle cx="11" cy="17.5" r="2" fill="#00E5FF" opacity=".5"/>
+            <polygon points="21,13 29,9 29,26 21,22" fill="none" stroke="#00CCEE" stroke-width="1.5"/>
+            <rect x="9" y="5" width="4" height="7" rx="1.5" fill="none" stroke="#00E5FF" stroke-width="1.5"/>
           </svg>
         </div>
         <div class="service-name">KAMERA KURULUMU VE MONTAJI</div>
@@ -1022,152 +687,74 @@
       <!-- AVİZE -->
       <div class="service-card" tabindex="0">
         <div class="service-icon">
-          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" width="32" height="32">
-            <!-- tavan bağlantısı -->
-            <rect x="14" y="1" width="4" height="5" rx="1" fill="#FFD700"/>
-            <!-- merkez top -->
-            <circle cx="16" cy="8" r="2.5" fill="#FFD700"/>
-            <!-- ana kol (yatay) -->
-            <rect x="5" y="10" width="22" height="2.5" rx="1.2" fill="#FFD700"/>
-            <!-- sol kol -->
-            <path d="M8 12.5 Q6 16 5 18" stroke="#FFD700" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-            <!-- orta sol kol -->
-            <path d="M12 12.5 Q11 16 10 18" stroke="#FFD700" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-            <!-- orta kol -->
-            <line x1="16" y1="12.5" x2="16" y2="18" stroke="#FFD700" stroke-width="2.2" stroke-linecap="round"/>
-            <!-- orta sağ kol -->
-            <path d="M20 12.5 Q21 16 22 18" stroke="#FFD700" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-            <!-- sağ kol -->
-            <path d="M24 12.5 Q26 16 27 18" stroke="#FFD700" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-            <!-- ampuller -->
-            <ellipse cx="5" cy="21" rx="2.5" ry="3.5" fill="#FFD700"/>
-            <ellipse cx="10" cy="21" rx="2.5" ry="3.5" fill="#FFD700"/>
-            <ellipse cx="16" cy="21" rx="2.5" ry="3.5" fill="#FFD700"/>
-            <ellipse cx="22" cy="21" rx="2.5" ry="3.5" fill="#FFD700"/>
-            <ellipse cx="27" cy="21" rx="2.5" ry="3.5" fill="#FFD700"/>
+          <svg viewBox="0 0 32 32" fill="none" width="32" height="32">
+            <rect x="14" y="1" width="4" height="5" rx="1" stroke="#9944FF" stroke-width="1.5" fill="none"/>
+            <circle cx="16" cy="8" r="2.5" stroke="#9944FF" stroke-width="1.5" fill="none"/>
+            <rect x="5" y="10" width="22" height="2.5" rx="1.2" stroke="#9944FF" stroke-width="1.5" fill="none"/>
+            <path d="M8 12.5 Q6 16 5 18" stroke="#9944FF" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <path d="M12 12.5 Q11 16 10 18" stroke="#9944FF" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <line x1="16" y1="12.5" x2="16" y2="18" stroke="#9944FF" stroke-width="2" stroke-linecap="round"/>
+            <path d="M20 12.5 Q21 16 22 18" stroke="#9944FF" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <path d="M24 12.5 Q26 16 27 18" stroke="#9944FF" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <ellipse cx="5"  cy="21" rx="2.5" ry="3.5" stroke="#9944FF" stroke-width="1.5" fill="none"/>
+            <ellipse cx="10" cy="21" rx="2.5" ry="3.5" stroke="#9944FF" stroke-width="1.5" fill="none"/>
+            <ellipse cx="16" cy="21" rx="2.5" ry="3.5" stroke="#9944FF" stroke-width="1.5" fill="none"/>
+            <ellipse cx="22" cy="21" rx="2.5" ry="3.5" stroke="#9944FF" stroke-width="1.5" fill="none"/>
+            <ellipse cx="27" cy="21" rx="2.5" ry="3.5" stroke="#9944FF" stroke-width="1.5" fill="none"/>
           </svg>
         </div>
         <div class="service-name">AVİZE MONTAJI</div>
       </div>
 
-      <!-- ELEKTRİK ARIZA (ÜÇGEN) -->
+      <!-- ELEKTRİK ARIZA -->
       <div class="service-card" tabindex="0">
         <div class="service-icon">
-          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" width="32" height="32">
-            <!-- üçgen dış (dolgu) -->
-            <path d="M16 2L1 28H31L16 2Z" fill="#FFD700"/>
-            <!-- üçgen iç boşluk -->
-            <path d="M16 6L4 26H28L16 6Z" fill="#1a1200"/>
-            <!-- şimşek -->
-            <polygon points="18,11 13,19 16.5,19 14.5,27 20,19 16.5,19" fill="#FFD700"/>
+          <svg viewBox="0 0 32 32" fill="none" width="32" height="32">
+            <path d="M16 2L1 28H31L16 2Z" stroke="#00E5FF" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
+            <polygon points="18,11 13,19 16.5,19 14.5,27 20,19 16.5,19" fill="#00E5FF"/>
           </svg>
         </div>
         <div class="service-name">ELEKTRİK ARIZA VE TESİSAT</div>
       </div>
 
-      <!-- UYDU ÇANAK (desktop'ta görünür) -->
-      <div class="service-card wide" tabindex="0" id="s4">
+      <!-- UYDU ÇANAK -->
+      <div class="service-card" tabindex="0">
         <div class="service-icon">
-          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" width="32" height="32">
-            <!-- çanak -->
-            <path d="M3 22 Q3 6 16 4 Q22 4 26 9 Q30 14 28 22Z" fill="#FFD700"/>
-            <!-- çanak iç -->
-            <path d="M5 21 Q5 9 15 7 Q20 7 24 11 Q27 15 26 21Z" fill="#1a1200"/>
-            <!-- merkez nokta -->
-            <circle cx="15" cy="15" r="2.5" fill="#FFD700"/>
-            <!-- montaj kolu -->
-            <line x1="15" y1="22" x2="19" y2="28" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
-            <!-- taban -->
-            <line x1="15" y1="28" x2="24" y2="28" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
-            <!-- sinyal dalgaları -->
-            <path d="M22 6 Q26 8 27 12" stroke="#FFD700" stroke-width="1.8" stroke-linecap="round" fill="none" opacity=".7"/>
-            <path d="M24 3 Q30 6 31 12" stroke="#FFD700" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".4"/>
+          <svg viewBox="0 0 32 32" fill="none" width="32" height="32">
+            <path d="M3 22 Q3 6 16 4 Q22 4 26 9 Q30 14 28 22Z" stroke="#4477FF" stroke-width="1.8" fill="none"/>
+            <circle cx="15" cy="15" r="2.5" fill="#4477FF"/>
+            <line x1="15" y1="22" x2="19" y2="28" stroke="#4477FF" stroke-width="2" stroke-linecap="round"/>
+            <line x1="15" y1="28" x2="24" y2="28" stroke="#4477FF" stroke-width="2" stroke-linecap="round"/>
+            <path d="M22 6 Q26 8 27 12" stroke="#4477FF" stroke-width="1.8" stroke-linecap="round" fill="none" opacity=".7"/>
+            <path d="M24 3 Q30 6 31 12" stroke="#4477FF" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".4"/>
           </svg>
         </div>
         <div class="service-name">UYDU ÇANAK KURULUMU</div>
       </div>
 
-      <!-- EV ELEKTRİK (desktop'ta görünür) -->
-      <div class="service-card wide" tabindex="0" id="s5">
-        <div class="service-icon">
-          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" width="32" height="32">
-            <!-- ev çatısı -->
-            <polygon points="16,2 1,14 31,14" fill="#FFD700"/>
-            <!-- ev gövdesi -->
-            <rect x="4" y="13" width="24" height="17" rx="1" fill="#FFD700"/>
-            <!-- ev iç -->
-            <rect x="7" y="15" width="18" height="13" rx="1" fill="#1a1200"/>
-            <!-- şimşek -->
-            <polygon points="18,17 13,23 16.5,23 14.5,29 20,23 16.5,23" fill="#FFD700"/>
-          </svg>
-        </div>
-        <div class="service-name">ELEKTRİK ARIZA VE TESİSAT</div>
-      </div>
-
-    </div>
-
-    <!-- Mobile bottom row -->
-    <div class="services-grid-bottom">
-      <div class="service-card wide" tabindex="0">
-        <div class="service-icon">
-          <svg viewBox="0 0 32 32" fill="none" width="32" height="32">
-            <path d="M3 22 Q3 6 16 4 Q22 4 26 9 Q30 14 28 22Z" fill="#FFD700"/>
-            <path d="M5 21 Q5 9 15 7 Q20 7 24 11 Q27 15 26 21Z" fill="#1a1200"/>
-            <circle cx="15" cy="15" r="2.5" fill="#FFD700"/>
-            <line x1="15" y1="22" x2="19" y2="28" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
-            <line x1="15" y1="28" x2="24" y2="28" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
-            <path d="M22 6 Q26 8 27 12" stroke="#FFD700" stroke-width="1.8" stroke-linecap="round" fill="none" opacity=".7"/>
-            <path d="M24 3 Q30 6 31 12" stroke="#FFD700" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".4"/>
-          </svg>
-        </div>
-        <div class="service-name">UYDU ÇANAK KURULUMU</div>
-      </div>
-      <div class="service-card wide" tabindex="0">
-        <div class="service-icon">
-          <svg viewBox="0 0 32 32" fill="none" width="32" height="32">
-            <polygon points="16,2 1,14 31,14" fill="#FFD700"/>
-            <rect x="4" y="13" width="24" height="17" rx="1" fill="#FFD700"/>
-            <rect x="7" y="15" width="18" height="13" rx="1" fill="#1a1200"/>
-            <polygon points="18,17 13,23 16.5,23 14.5,29 20,23 16.5,23" fill="#FFD700"/>
-          </svg>
-        </div>
-        <div class="service-name">ELEKTRİK ARIZA VE TESİSAT</div>
-      </div>
     </div>
   </section>
 
   <div class="divider"></div>
 
-  <!-- ══ GALERİ ══ -->
+  <!-- GALERİ -->
   <section class="section-sm" id="galeri">
     <div class="section-title"><h2>GALERİ</h2></div>
 
     <div class="gallery-cards">
 
-      <!-- 1. Kamera Kurulumu -->
       <div class="gcard">
-        <div class="gcard-img" style="background:linear-gradient(135deg,#0d1a0d,#131300)">
+        <div class="gcard-img" style="background:linear-gradient(135deg,#050e14,#0a1a0a)">
           <svg viewBox="0 0 100 90" width="100" height="90">
-            <!-- kamera gövdesi (dolgu) -->
-            <rect x="12" y="28" width="46" height="30" rx="5" fill="#FFD700"/>
-            <!-- kamera sağ ön lens kapağı -->
-            <rect x="8" y="32" width="8" height="22" rx="3" fill="#E6A800"/>
-            <!-- lens dış halka -->
-            <circle cx="35" cy="43" r="11" fill="#1a1200"/>
-            <!-- lens iç -->
-            <circle cx="35" cy="43" r="7" fill="#0d0d00"/>
-            <!-- lens parlaması -->
-            <circle cx="31" cy="39" r="3" fill="#FFD700" opacity=".4"/>
-            <!-- sağ üçgen fin / video fin -->
-            <polygon points="58,32 82,20 82,66 58,54" fill="#E6A800"/>
-            <!-- montaj direği -->
-            <rect x="30" y="10" width="10" height="20" rx="3" fill="#FFD700"/>
-            <!-- tavan braketi -->
-            <rect x="18" y="8" width="34" height="8" rx="3" fill="#E6A800"/>
-            <!-- kablo -->
-            <path d="M58 43 Q75 43 75 58 L75 75" stroke="#555" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-            <!-- zemin -->
-            <rect x="0" y="78" width="100" height="4" rx="2" fill="#1a1a1a"/>
+            <rect x="12" y="28" width="46" height="30" rx="5" fill="none" stroke="#00E5FF" stroke-width="2"/>
+            <rect x="8"  y="32" width="8"  height="22" rx="3" fill="none" stroke="#00CCEE" stroke-width="1.5"/>
+            <circle cx="35" cy="43" r="11" stroke="#00E5FF" stroke-width="2" fill="none"/>
+            <circle cx="35" cy="43" r="5"  fill="#00E5FF" opacity=".3"/>
+            <polygon points="58,32 82,20 82,66 58,54" fill="none" stroke="#00CCEE" stroke-width="1.5"/>
+            <rect x="30" y="10" width="10" height="20" rx="3" fill="none" stroke="#00E5FF" stroke-width="1.5"/>
+            <rect x="18" y="8"  width="34" height="8"  rx="3" fill="none" stroke="#00CCEE" stroke-width="1.5"/>
+            <path d="M58 43 Q75 43 75 58 L75 75" stroke="#1a4060" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <rect x="0" y="78" width="100" height="4" rx="2" fill="#1a2030"/>
           </svg>
         </div>
         <div class="gcard-body">
@@ -1177,27 +764,16 @@
         </div>
       </div>
 
-      <!-- 2. Elektrik Panosu -->
       <div class="gcard">
-        <div class="gcard-img" style="background:linear-gradient(135deg,#0d0d1a,#0d1a0d)">
+        <div class="gcard-img" style="background:linear-gradient(135deg,#080d1a,#0a140d)">
           <svg viewBox="0 0 100 90" width="100" height="90">
-            <!-- pano kutusu -->
-            <rect x="18" y="8" width="64" height="72" rx="5" fill="#FFD700"/>
-            <!-- pano iç -->
-            <rect x="22" y="12" width="56" height="64" rx="3" fill="#1a1200"/>
-            <!-- üst bar / başlık -->
-            <rect x="22" y="12" width="56" height="12" rx="3" fill="#E6A800"/>
-            <!-- sigorta sıraları -->
-            <rect x="28" y="30" width="12" height="18" rx="2" fill="#FFD700"/>
-            <rect x="44" y="30" width="12" height="18" rx="2" fill="#FFD700"/>
-            <rect x="60" y="30" width="12" height="18" rx="2" fill="#FFD700"/>
-            <!-- sigorta açma çubukları -->
-            <rect x="32" y="33" width="4" height="12" rx="2" fill="#1a1200"/>
-            <rect x="48" y="33" width="4" height="12" rx="2" fill="#1a1200"/>
-            <rect x="64" y="30" width="4" height="9" rx="2" fill="#1a1200"/>
-            <!-- ana şalter -->
-            <rect x="28" y="54" width="44" height="14" rx="3" fill="#E6A800"/>
-            <rect x="44" y="57" width="12" height="8" rx="2" fill="#1a1200"/>
+            <rect x="18" y="8"  width="64" height="72" rx="5" fill="none" stroke="#4477FF" stroke-width="2"/>
+            <rect x="22" y="12" width="56" height="64" rx="3" fill="#0a0f1a"/>
+            <rect x="22" y="12" width="56" height="12" rx="3" fill="none" stroke="#4477FF" stroke-width="1.5"/>
+            <rect x="28" y="30" width="12" height="18" rx="2" fill="none" stroke="#4477FF" stroke-width="1.5"/>
+            <rect x="44" y="30" width="12" height="18" rx="2" fill="none" stroke="#4477FF" stroke-width="1.5"/>
+            <rect x="60" y="30" width="12" height="18" rx="2" fill="none" stroke="#4477FF" stroke-width="1.5"/>
+            <rect x="28" y="54" width="44" height="14" rx="3" fill="none" stroke="#4477FF" stroke-width="1.5"/>
           </svg>
         </div>
         <div class="gcard-body">
@@ -1207,38 +783,22 @@
         </div>
       </div>
 
-      <!-- 3. Avize Montajı -->
       <div class="gcard">
-        <div class="gcard-img" style="background:linear-gradient(135deg,#1a1000,#0d0800)">
+        <div class="gcard-img" style="background:linear-gradient(135deg,#0d0814,#050810)">
           <svg viewBox="0 0 100 90" width="100" height="90">
-            <!-- tavan bağlantısı -->
-            <rect x="44" y="2" width="12" height="8" rx="3" fill="#FFD700"/>
-            <!-- merkez top -->
-            <circle cx="50" cy="16" r="7" fill="#FFD700"/>
-            <!-- kollar -->
-            <rect x="14" y="20" width="72" height="6" rx="3" fill="#FFD700"/>
-            <!-- sol dış kol -->
-            <path d="M18 26 Q14 36 12 44" stroke="#FFD700" stroke-width="5" stroke-linecap="round" fill="none"/>
-            <!-- sol iç kol -->
-            <path d="M30 26 Q28 34 26 42" stroke="#FFD700" stroke-width="5" stroke-linecap="round" fill="none"/>
-            <!-- orta kol -->
-            <line x1="50" y1="26" x2="50" y2="42" stroke="#FFD700" stroke-width="5" stroke-linecap="round"/>
-            <!-- sağ iç kol -->
-            <path d="M70 26 Q72 34 74 42" stroke="#FFD700" stroke-width="5" stroke-linecap="round" fill="none"/>
-            <!-- sağ dış kol -->
-            <path d="M82 26 Q86 36 88 44" stroke="#FFD700" stroke-width="5" stroke-linecap="round" fill="none"/>
-            <!-- ampuller (dolu, iri) -->
-            <ellipse cx="12" cy="52" rx="7" ry="9" fill="#FFD700"/>
-            <ellipse cx="26" cy="50" rx="7" ry="9" fill="#FFD700"/>
-            <ellipse cx="50" cy="50" rx="7" ry="9" fill="#FFD700"/>
-            <ellipse cx="74" cy="50" rx="7" ry="9" fill="#FFD700"/>
-            <ellipse cx="88" cy="52" rx="7" ry="9" fill="#FFD700"/>
-            <!-- ampul tabanları -->
-            <rect x="8" y="60" width="8" height="4" rx="1" fill="#E6A800"/>
-            <rect x="22" y="58" width="8" height="4" rx="1" fill="#E6A800"/>
-            <rect x="46" y="58" width="8" height="4" rx="1" fill="#E6A800"/>
-            <rect x="70" y="58" width="8" height="4" rx="1" fill="#E6A800"/>
-            <rect x="84" y="60" width="8" height="4" rx="1" fill="#E6A800"/>
+            <rect x="44" y="2"  width="12" height="8" rx="3" stroke="#9944FF" stroke-width="2" fill="none"/>
+            <circle cx="50" cy="16" r="7" stroke="#9944FF" stroke-width="2" fill="none"/>
+            <rect x="14" y="20" width="72" height="6" rx="3" stroke="#9944FF" stroke-width="2" fill="none"/>
+            <path d="M18 26 Q14 36 12 44" stroke="#9944FF" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+            <path d="M30 26 Q28 34 26 42" stroke="#9944FF" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+            <line x1="50" y1="26" x2="50" y2="42" stroke="#9944FF" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M70 26 Q72 34 74 42" stroke="#9944FF" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+            <path d="M82 26 Q86 36 88 44" stroke="#9944FF" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+            <ellipse cx="12" cy="52" rx="7" ry="9" stroke="#9944FF" stroke-width="2" fill="none"/>
+            <ellipse cx="26" cy="50" rx="7" ry="9" stroke="#9944FF" stroke-width="2" fill="none"/>
+            <ellipse cx="50" cy="50" rx="7" ry="9" stroke="#9944FF" stroke-width="2" fill="none"/>
+            <ellipse cx="74" cy="50" rx="7" ry="9" stroke="#9944FF" stroke-width="2" fill="none"/>
+            <ellipse cx="88" cy="52" rx="7" ry="9" stroke="#9944FF" stroke-width="2" fill="none"/>
           </svg>
         </div>
         <div class="gcard-body">
@@ -1248,63 +808,38 @@
         </div>
       </div>
 
-      <!-- 4. Uydu Çanak -->
       <div class="gcard">
-        <div class="gcard-img" style="background:linear-gradient(135deg,#0a0a1a,#0d0d1a)">
+        <div class="gcard-img" style="background:linear-gradient(135deg,#080c1a,#0a0c1a)">
           <svg viewBox="0 0 100 90" width="100" height="90">
-            <!-- zemin -->
-            <rect x="0" y="76" width="100" height="6" rx="2" fill="#1a1a1a"/>
-            <!-- direk -->
-            <rect x="30" y="48" width="8" height="30" rx="3" fill="#FFD700"/>
-            <!-- taban -->
-            <rect x="18" y="72" width="32" height="7" rx="3" fill="#E6A800"/>
-            <!-- çanak (dolgu yay) -->
-            <path d="M6 52 Q6 10 34 8 Q52 8 62 22 Q72 36 68 52Z" fill="#FFD700"/>
-            <!-- çanak iç (koyu) -->
-            <path d="M10 50 Q10 16 33 14 Q49 14 58 26 Q67 38 64 50Z" fill="#1a1200"/>
-            <!-- merkez nokta / alıcı -->
-            <circle cx="37" cy="34" r="6" fill="#FFD700"/>
-            <!-- alıcı kolu -->
-            <line x1="37" y1="34" x2="52" y2="20" stroke="#E6A800" stroke-width="3" stroke-linecap="round"/>
-            <!-- sinyal dalgaları -->
-            <path d="M72 14 Q80 18 82 28" stroke="#FFD700" stroke-width="3" stroke-linecap="round" fill="none" opacity=".8"/>
-            <path d="M76 8 Q88 14 90 28" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round" fill="none" opacity=".5"/>
-            <path d="M80 2 Q96 10 98 28" stroke="#FFD700" stroke-width="2" stroke-linecap="round" fill="none" opacity=".3"/>
+            <rect x="0" y="76" width="100" height="6" rx="2" fill="#1a2030"/>
+            <rect x="30" y="48" width="8"  height="30" rx="3" stroke="#4477FF" stroke-width="1.5" fill="none"/>
+            <rect x="18" y="72" width="32" height="7" rx="3" stroke="#4477FF" stroke-width="1.5" fill="none"/>
+            <path d="M6 52 Q6 10 34 8 Q52 8 62 22 Q72 36 68 52Z" stroke="#4477FF" stroke-width="2" fill="none"/>
+            <circle cx="37" cy="34" r="6" stroke="#4477FF" stroke-width="1.5" fill="rgba(68,119,255,.2)"/>
+            <line x1="37" y1="34" x2="52" y2="20" stroke="#4477FF" stroke-width="2" stroke-linecap="round"/>
+            <path d="M72 14 Q80 18 82 28" stroke="#4477FF" stroke-width="2.5" stroke-linecap="round" fill="none" opacity=".8"/>
+            <path d="M76 8 Q88 14 90 28"  stroke="#4477FF" stroke-width="2"   stroke-linecap="round" fill="none" opacity=".5"/>
           </svg>
         </div>
         <div class="gcard-body">
           <div class="gcard-title">UYDU ÇANAK KURULUMU</div>
-          <div class="gcard-desc">Çanak anten montajı ve uydu alıcı ayarı</div>
+          <div class="gcard-desc">Çanak anten montajı ve alıcı ayarı</div>
           <span class="gcard-tag">UYDU</span>
         </div>
       </div>
 
-      <!-- 5. Dış Aydınlatma -->
       <div class="gcard">
-        <div class="gcard-img" style="background:linear-gradient(135deg,#0a0800,#1a1200)">
+        <div class="gcard-img" style="background:linear-gradient(135deg,#050c10,#0a1214)">
           <svg viewBox="0 0 100 90" width="100" height="90">
-            <!-- zemin -->
-            <rect x="0" y="78" width="100" height="6" rx="2" fill="#1a1a1a"/>
-            <!-- SOL direk -->
-            <rect x="14" y="30" width="7" height="50" rx="3" fill="#FFD700"/>
-            <!-- sol kol (L şekli) -->
-            <rect x="14" y="30" width="26" height="7" rx="3" fill="#FFD700"/>
-            <!-- sol ampul kapağı -->
-            <path d="M32 36 L28 54 L46 54 Z" fill="#E6A800"/>
-            <!-- sol ampul (iri, dolu) -->
-            <ellipse cx="37" cy="50" rx="10" ry="7" fill="#FFD700"/>
-            <!-- sol ışık huzmesi -->
-            <path d="M27 54 Q37 72 47 54" fill="rgba(255,215,0,.12)"/>
-            <!-- SAĞ direk -->
-            <rect x="79" y="30" width="7" height="50" rx="3" fill="#FFD700"/>
-            <!-- sağ kol -->
-            <rect x="60" y="30" width="26" height="7" rx="3" fill="#FFD700"/>
-            <!-- sağ ampul kapağı -->
-            <path d="M68 36 L54 54 L72 54 Z" fill="#E6A800"/>
-            <!-- sağ ampul -->
-            <ellipse cx="63" cy="50" rx="10" ry="7" fill="#FFD700"/>
-            <!-- sağ ışık huzmesi -->
-            <path d="M53 54 Q63 72 73 54" fill="rgba(255,215,0,.12)"/>
+            <rect x="0"  y="78" width="100" height="6" rx="2" fill="#1a2030"/>
+            <rect x="14" y="30" width="7"  height="50" rx="3" stroke="#00E5FF" stroke-width="1.5" fill="none"/>
+            <rect x="14" y="30" width="26" height="7"  rx="3" stroke="#00E5FF" stroke-width="1.5" fill="none"/>
+            <path d="M32 36 L28 54 L46 54 Z" stroke="#00CCEE" stroke-width="1.5" fill="none"/>
+            <ellipse cx="37" cy="50" rx="10" ry="7" stroke="#00E5FF" stroke-width="1.5" fill="rgba(0,229,255,.1)"/>
+            <rect x="79" y="30" width="7"  height="50" rx="3" stroke="#00E5FF" stroke-width="1.5" fill="none"/>
+            <rect x="60" y="30" width="26" height="7"  rx="3" stroke="#00E5FF" stroke-width="1.5" fill="none"/>
+            <path d="M68 36 L54 54 L72 54 Z" stroke="#00CCEE" stroke-width="1.5" fill="none"/>
+            <ellipse cx="63" cy="50" rx="10" ry="7" stroke="#00E5FF" stroke-width="1.5" fill="rgba(0,229,255,.1)"/>
           </svg>
         </div>
         <div class="gcard-body">
@@ -1314,29 +849,26 @@
         </div>
       </div>
 
-      <!-- 6. Akıllı Ev -->
       <div class="gcard">
-        <div class="gcard-img" style="background:linear-gradient(135deg,#0d0a14,#0a140d)">
+        <div class="gcard-img" style="background:linear-gradient(135deg,#0a0814,#060e10)">
           <svg viewBox="0 0 100 90" width="100" height="90">
-            <!-- ev çatısı (dolgu) -->
-            <polygon points="50,5 8,38 92,38" fill="#FFD700"/>
-            <!-- ev gövdesi -->
-            <rect x="14" y="36" width="72" height="48" rx="2" fill="#FFD700"/>
-            <!-- ev iç -->
-            <rect x="20" y="40" width="60" height="42" rx="2" fill="#1a1200"/>
-            <!-- ekran/panel -->
-            <rect x="28" y="46" width="44" height="28" rx="3" fill="#0d0d00" stroke="#E6A800" stroke-width="1.5"/>
-            <!-- ekran içi: şimşek ikonu (büyük, net) -->
-            <polygon points="54,50 44,63 51,63 48,74 58,61 51,61" fill="#FFD700"/>
-            <!-- Kapı -->
-            <rect x="40" y="64" width="20" height="18" rx="2" fill="#E6A800"/>
-            <circle cx="57" cy="73" r="2" fill="#1a1200"/>
+            <rect x="18" y="8"  width="64" height="72" rx="5" fill="none" stroke="#00E5FF" stroke-width="2"/>
+            <rect x="22" y="12" width="56" height="64" rx="3" fill="#060d14"/>
+            <rect x="28" y="20" width="20" height="24" rx="2" fill="none" stroke="#4477FF" stroke-width="1.5"/>
+            <rect x="52" y="20" width="20" height="24" rx="2" fill="none" stroke="#9944FF" stroke-width="1.5"/>
+            <rect x="28" y="50" width="44" height="16" rx="2" fill="none" stroke="#00E5FF" stroke-width="1.5"/>
+            <circle cx="38" cy="32" r="4" fill="rgba(68,119,255,.3)" stroke="#4477FF" stroke-width="1.5"/>
+            <circle cx="62" cy="32" r="4" fill="rgba(153,68,255,.3)" stroke="#9944FF" stroke-width="1.5"/>
+            <line x1="34" y1="58" x2="34" y2="62" stroke="#00E5FF" stroke-width="2" stroke-linecap="round"/>
+            <line x1="44" y1="58" x2="44" y2="62" stroke="#00E5FF" stroke-width="2" stroke-linecap="round"/>
+            <line x1="54" y1="58" x2="54" y2="62" stroke="#00E5FF" stroke-width="2" stroke-linecap="round"/>
+            <line x1="64" y1="58" x2="64" y2="62" stroke="#00E5FF" stroke-width="2" stroke-linecap="round"/>
           </svg>
         </div>
         <div class="gcard-body">
-          <div class="gcard-title">AKILLI EV SİSTEMİ</div>
-          <div class="gcard-desc">Otomasyon, pano ve akıllı sistem kurulumu</div>
-          <span class="gcard-tag">OTOMASYON</span>
+          <div class="gcard-title">ELEKTRİK TESİSAT</div>
+          <div class="gcard-desc">Komple tesisat yenileme ve tadilat işleri</div>
+          <span class="gcard-tag">TESİSAT</span>
         </div>
       </div>
 
@@ -1345,126 +877,247 @@
 
   <div class="divider"></div>
 
-  <!-- ══ HAKKIMIZDA ══ -->
+  <!-- MÜŞTERİ YORUMLARI -->
+  <section class="section-sm" id="yorumlar">
+    <div class="section-title"><h2>MÜŞTERİ YORUMLARI</h2></div>
+    <div class="reviews-grid">
+
+      <div class="review-card">
+        <div class="review-header">
+          <div class="review-avatar" style="background:rgba(0,229,255,.15);border:1.5px solid rgba(0,229,255,.3);color:#00E5FF;">A</div>
+          <div class="review-info">
+            <div class="review-name">Ahmet K.</div>
+            <div class="review-stars">★★★★★</div>
+          </div>
+          <div class="review-date">Mart 2025</div>
+        </div>
+        <div class="review-text">Çok hızlı geldiler, sorunu kısa sürede çözdüler. Fiyatlar makul, işçilik temiz. Kesinlikle tavsiye ederim.</div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-header">
+          <div class="review-avatar" style="background:rgba(153,68,255,.15);border:1.5px solid rgba(153,68,255,.3);color:#9944FF;">F</div>
+          <div class="review-info">
+            <div class="review-name">Fatma D.</div>
+            <div class="review-stars">★★★★★</div>
+          </div>
+          <div class="review-date">Şubat 2025</div>
+        </div>
+        <div class="review-text">Kamera sistemimi kurdular, çok memnunum. Profesyonel ekip, temiz iş yapıyorlar. Teşekkürler!</div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-header">
+          <div class="review-avatar" style="background:rgba(68,119,255,.15);border:1.5px solid rgba(68,119,255,.3);color:#4477FF;">M</div>
+          <div class="review-info">
+            <div class="review-name">Mehmet Y.</div>
+            <div class="review-stars">★★★★★</div>
+          </div>
+          <div class="review-date">Ocak 2025</div>
+        </div>
+        <div class="review-text">Gece elektrik arızası yaşadık, aynı gece geldiler. 7/24 dedikleri gerçekten doğru, çok teşekkürler.</div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-header">
+          <div class="review-avatar" style="background:rgba(0,229,255,.15);border:1.5px solid rgba(0,229,255,.3);color:#00E5FF;">Z</div>
+          <div class="review-info">
+            <div class="review-name">Zeynep A.</div>
+            <div class="review-stars">★★★★★</div>
+          </div>
+          <div class="review-date">Aralık 2024</div>
+        </div>
+        <div class="review-text">Avize montajı için çağırdım. Hem hızlı hem de çok temiz çalıştılar. Fiyat performans gayet iyi.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- HAKKIMIZDA -->
   <section class="section" id="hakkimizda">
     <div class="section-title"><h2>HAKKIMIZDA</h2></div>
-
     <div class="about-layout">
       <div class="about-card">
         <p>
-          Berat Elektrik olarak Ankara'da yıllardır güvenilir elektrik hizmetleri sunuyoruz.
-          Deneyimli ekibimizle kamera sistemleri, avize montajı, elektrik arıza tesisat ile
-          uydu çanak kurulumunda müşteri memnuniyetini her zaman ön planda tutuyoruz.
-          Güvenlik, kalite ve uzmanlık — her işimizin temel ilkeleridir.
+          Berat Elektrik olarak Ankara'da elektrik hizmetleri sunuyoruz.
+          Kamera sistemleri, avize montajı, elektrik arıza tesisat ve
+          uydu çanak kurulumunda müşteri memnuniyetini ön planda tutuyoruz.
+          Her işte güvenlik, kalite ve temiz işçiliği ilke ediniyoruz.
         </p>
         <div class="about-stats">
           <div class="stat">
-            <div class="stat-num">10+</div>
+            <div class="stat-num">5+</div>
             <div class="stat-label">YIL DENEYİM</div>
           </div>
           <div class="stat">
-            <div class="stat-num">500+</div>
+            <div class="stat-num">300+</div>
             <div class="stat-label">TAMAMLANAN İŞ</div>
           </div>
           <div class="stat">
-            <div class="stat-num">%100</div>
-            <div class="stat-label">MÜŞTERİ MEMNUNİYETİ</div>
+            <div class="stat-num">7/24</div>
+            <div class="stat-label">ACİL SERVİS</div>
           </div>
         </div>
       </div>
-
-      <!-- Visible only on desktop via about-layout grid -->
-      <div class="about-card" style="background:linear-gradient(135deg,#131300,#0a0a00); display:flex; flex-direction:column; justify-content:center; align-items:center; gap:20px; text-align:center;">
+      <div class="about-card" style="background:linear-gradient(135deg,#0a0e1a,#060c14); display:flex; flex-direction:column; justify-content:center; align-items:center; gap:20px; text-align:center;">
         <div style="opacity:.3;">
           <svg viewBox="0 0 64 64" fill="none" width="64" height="64">
-            <polygon points="36,6 16,36 30,36 28,58 48,28 34,28" fill="#FFD700"/>
+            <polygon points="36,6 16,36 30,36 28,58 48,28 34,28" stroke="#00E5FF" stroke-width="2" fill="none"/>
           </svg>
         </div>
-        <div style="font-family:'Bebas Neue',sans-serif; font-size:1.8rem; letter-spacing:4px; color:var(--gold); opacity:.6;">7/24 HİZMET</div>
+        <div style="font-family:'Bebas Neue',sans-serif; font-size:1.8rem; letter-spacing:4px; color:var(--cyan); opacity:.7;">7/24 HİZMET</div>
         <div style="font-size:.9rem; font-weight:600; letter-spacing:1.5px; color:var(--muted); line-height:1.8;">
           Acil elektrik arızalarında<br>her zaman yanınızdayız.
         </div>
+        <a href="tel:05059770648"
+           style="display:inline-flex;align-items:center;gap:8px;background:var(--cyan);color:#000;
+                  font-family:'Oswald',sans-serif;font-size:.85rem;font-weight:700;letter-spacing:1.5px;
+                  padding:12px 24px;border-radius:50px;text-decoration:none;margin-top:4px;">
+          HEMEN ARA
+        </a>
       </div>
     </div>
   </section>
 
   <div class="divider"></div>
 
-  <!-- ══ İLETİŞİM ══ -->
-  <section class="section" id="iletisim">
-    <div class="section-title"><h2>İLETİŞİM</h2></div>
+  <!-- SSS -->
+  <section class="section-sm" id="sss">
+    <div class="section-title"><h2>SIK SORULAN SORULAR</h2></div>
+    <div class="faq-list">
 
-    <div class="contact-layout">
-      <div class="contact-list">
-
-        <a href="tel:05059770648" class="contact-btn">
-          <div class="contact-icon phone-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.07 12 19.79 19.79 0 0 1 1 3.18 2 2 0 0 1 3 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21 16"/>
-            </svg>
-          </div>
-          <div class="contact-num">0505 977 06 48</div>
-          <svg class="contact-chevron" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" width="16">
-            <polyline points="9 18 15 12 9 6"/>
-          </svg>
-        </a>
-
-        <a href="tel:05449449017" class="contact-btn">
-          <div class="contact-icon phone-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.07 12 19.79 19.79 0 0 1 1 3.18 2 2 0 0 1 3 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21 16"/>
-            </svg>
-          </div>
-          <div class="contact-num">0544 944 90 17</div>
-          <svg class="contact-chevron" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" width="16">
-            <polyline points="9 18 15 12 9 6"/>
-          </svg>
-        </a>
-
-        <a href="https://wa.me/905059770648" target="_blank" rel="noopener" class="contact-btn whatsapp">
-          <div class="contact-icon wa-icon">
-            <svg viewBox="0 0 24 24" fill="#25D366">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
-            </svg>
-          </div>
-          <div class="contact-num">WHATSAPP İLE İLETİŞİME GEÇ</div>
-          <svg class="contact-chevron" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" width="16">
-            <polyline points="9 18 15 12 9 6"/>
-          </svg>
-        </a>
-
+      <div class="faq-item">
+        <div class="faq-q">Acil arızalarda ne kadar sürede geliyorsunuz? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Ankara içinde genellikle 1–2 saat içinde ulaşıyoruz. 7/24 acil servis hattımızdan ulaşabilirsiniz.</div>
       </div>
 
-      <!-- Map/info card (desktop only) -->
-      <div class="contact-map">
-        <div class="contact-map-icon">
-          <svg viewBox="0 0 48 56" fill="none" width="48" height="56">
-            <path d="M24 2C14.06 2 6 10.06 6 20C6 33 24 54 24 54C24 54 42 33 42 20C42 10.06 33.94 2 24 2Z" fill="rgba(255,215,0,0.12)" stroke="#FFD700" stroke-width="2"/>
-            <circle cx="24" cy="20" r="6" fill="#FFD700" opacity=".9"/>
-          </svg>
-        </div>
-        <p>HİZMET BÖLGEMİZ</p>
-        <div class="contact-map-addr">ANKARA VE ÇEVRESİ</div>
-        <p style="margin-top:12px;">7 gün 24 saat<br>acil servis desteği</p>
-        <a href="https://wa.me/905059770648" target="_blank" rel="noopener"
-           style="margin-top:16px; display:inline-flex; align-items:center; gap:8px;
-                  background:var(--gold); color:#000; font-family:'Oswald',sans-serif;
-                  font-size:.85rem; font-weight:700; letter-spacing:1.5px;
-                  padding:12px 24px; border-radius:50px; text-decoration:none;
-                  transition:background .2s;"
-           onmouseover="this.style.background='#FFC200'" onmouseout="this.style.background='#FFD700'">
-          HEMEN YAZIN
-        </a>
+      <div class="faq-item">
+        <div class="faq-q">Hangi ilçelere hizmet veriyorsunuz? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Ankara'nın tüm ilçelerine hizmet veriyoruz. Çankaya, Keçiören, Mamak, Altındağ, Etimesgut, Sincan ve diğer ilçelerde aktif olarak çalışıyoruz.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Fatura kesiyor musunuz? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Evet, talep halinde e-arşiv fatura düzenliyoruz. Bireysel ve kurumsal müşterilerimize fatura kesilmektedir.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Kamera sistemleri için garanti veriyor musunuz? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Kurulum işçiliğimize 1 yıl, kullanılan ürünlere üretici garantisi kapsamında garanti veriyoruz.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Ödeme seçenekleriniz neler? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Nakit, havale/EFT ve kredi kartı ile ödeme kabul ediyoruz. Ödeme iş bitiminde yapılmaktadır.</div>
       </div>
 
     </div>
   </section>
 
-</div><!-- /page -->
+  <div class="divider"></div>
 
-<!-- ═══════════════════════════════════════════
-     FOOTER (desktop only)
-═══════════════════════════════════════════ -->
+  <!-- İLETİŞİM -->
+  <section class="section" id="iletisim">
+    <div class="section-title"><h2>İLETİŞİM</h2></div>
+    <div class="contact-layout">
+
+      <div>
+        <div class="contact-list">
+          <a href="tel:05059770648" class="contact-btn">
+            <div class="contact-icon phone-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#00E5FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.07 12 19.79 19.79 0 0 1 1 3.18 2 2 0 0 1 3 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21 16"/>
+              </svg>
+            </div>
+            <div class="contact-num">0505 977 06 48</div>
+            <svg class="contact-chevron" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" width="16">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
+          </a>
+
+          <a href="tel:05449449017" class="contact-btn">
+            <div class="contact-icon phone-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#00E5FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.07 12 19.79 19.79 0 0 1 1 3.18 2 2 0 0 1 3 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21 16"/>
+              </svg>
+            </div>
+            <div class="contact-num">0544 944 90 17</div>
+            <svg class="contact-chevron" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" width="16">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
+          </a>
+
+          <a href="https://wa.me/905059770648" target="_blank" rel="noopener" class="contact-btn whatsapp">
+            <div class="contact-icon wa-icon">
+              <svg viewBox="0 0 24 24" fill="#25D366">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+              </svg>
+            </div>
+            <div class="contact-num">WHATSAPP İLE İLETİŞİME GEÇ</div>
+            <svg class="contact-chevron" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" width="16">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- İletişim Formu -->
+        <div class="contact-form">
+          <h3>MESAJ GÖNDER</h3>
+          <!-- Formspree: form action'ı kendi ID'niz ile güncelleyin -->
+          <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            <div class="form-group">
+              <label>AD SOYAD</label>
+              <input type="text" name="name" placeholder="Adınız Soyadınız" required />
+            </div>
+            <div class="form-group">
+              <label>TELEFON</label>
+              <input type="tel" name="phone" placeholder="0500 000 00 00" required />
+            </div>
+            <div class="form-group">
+              <label>HİZMET TÜRÜ</label>
+              <select name="service">
+                <option value="">Seçiniz...</option>
+                <option>Kamera Kurulumu</option>
+                <option>Avize Montajı</option>
+                <option>Elektrik Arıza / Tesisat</option>
+                <option>Uydu Çanak Kurulumu</option>
+                <option>Diğer</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>MESAJ</label>
+              <textarea name="message" placeholder="Talebinizi kısaca açıklayın..."></textarea>
+            </div>
+            <button type="submit" class="form-submit">GÖNDER</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Harita -->
+      <div>
+        <div class="contact-map-wrap">
+          <!-- Gerçek adres için Google Maps embed URL'sini buraya yapıştırın -->
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d192940.27985899783!2d32.55613!3d39.902707!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d347d520732db5%3A0xbdc57b0c0842b8d!2sAnkara%2C+T%C3%BCrkiye!5e0!3m2!1str!2str"
+            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+        <div style="margin-top:16px; background:var(--card2); border:1.5px solid var(--border); border-radius:14px; padding:20px; text-align:center;">
+          <div style="font-size:1.5rem; margin-bottom:8px; opacity:.5;">📍</div>
+          <div style="font-family:'Oswald',sans-serif; font-size:.8rem; letter-spacing:1.5px; color:var(--muted);">HİZMET BÖLGEMİZ</div>
+          <div style="font-family:'Bebas Neue',sans-serif; font-size:1.3rem; letter-spacing:3px; color:var(--cyan); margin-top:4px;">ANKARA VE ÇEVRESİ</div>
+          <div style="font-size:.82rem; color:var(--muted); margin-top:8px; line-height:1.7;">7 gün 24 saat<br>acil servis desteği</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<!-- FOOTER -->
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-logo">BERAT <span>ELEKTRİK</span></div>
@@ -1475,23 +1128,19 @@
       <li><a href="#hakkimizda">Hakkımızda</a></li>
       <li><a href="#iletisim">İletişim</a></li>
     </ul>
-    <div class="footer-copy">© 2024 Berat Elektrik · Tüm hakları saklıdır.</div>
+    <div class="footer-copy">© 2025 Berat Elektrik · Tüm hakları saklıdır.</div>
   </div>
 </footer>
 
-<!-- ═══════════════════════════════════════════
-     MOBILE BOTTOM NAVIGATION
-═══════════════════════════════════════════ -->
+<!-- MOBILE BOTTOM NAV -->
 <nav class="bottom-nav">
-
   <a href="#ana-sayfa" class="nav-item active" id="nav-ana">
-    <svg viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#00E5FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
       <polyline points="9 22 9 12 15 12 15 22"/>
     </svg>
     <span>ANA SAYFA</span>
   </a>
-
   <a href="#hizmetler" class="nav-item" id="nav-hiz">
     <svg viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
@@ -1499,7 +1148,6 @@
     </svg>
     <span>HİZMETLER</span>
   </a>
-
   <a href="#hakkimizda" class="nav-item" id="nav-hak">
     <svg viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="10"/>
@@ -1508,7 +1156,6 @@
     </svg>
     <span>HAKKIMIZDA</span>
   </a>
-
   <a href="#galeri" class="nav-item" id="nav-gal">
     <svg viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <rect x="3" y="3" width="18" height="18" rx="2"/>
@@ -1517,18 +1164,23 @@
     </svg>
     <span>GALERİ</span>
   </a>
-
   <a href="#iletisim" class="nav-item" id="nav-ilt">
     <svg viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.07 12 19.79 19.79 0 0 1 1 3.18 2 2 0 0 1 3 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21 16"/>
     </svg>
     <span>İLETİŞİM</span>
   </a>
-
 </nav>
 
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/905059770648" target="_blank" rel="noopener" class="float-wa" aria-label="WhatsApp ile iletişim">
+  <svg viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+  </svg>
+</a>
+
 <script>
-  /* ═══ OSİLOSKOP CANVAS ═══ */
+  /* ═══ OSİLOSKOP ═══ */
   (function() {
     const canvas = document.getElementById('scopeCanvas');
     if (!canvas) return;
@@ -1547,72 +1199,56 @@
       const dpr = window.devicePixelRatio || 1;
       ctx.clearRect(0, 0, W, H);
 
-      /* dark background */
-      ctx.fillStyle = '#050e05';
+      ctx.fillStyle = '#030b0f';
       ctx.fillRect(0, 0, W, H);
 
-      /* grid */
-      ctx.strokeStyle = 'rgba(60,120,60,.25)';
+      ctx.strokeStyle = 'rgba(0,100,130,.2)';
       ctx.lineWidth = dpr;
       const cols = 10, rows = 5;
       for (let i = 1; i < cols; i++) {
-        ctx.beginPath();
-        ctx.moveTo(i * W / cols, 0);
-        ctx.lineTo(i * W / cols, H);
-        ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(i * W / cols, 0); ctx.lineTo(i * W / cols, H); ctx.stroke();
       }
       for (let j = 1; j < rows; j++) {
-        ctx.beginPath();
-        ctx.moveTo(0, j * H / rows);
-        ctx.lineTo(W, j * H / rows);
-        ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(0, j * H / rows); ctx.lineTo(W, j * H / rows); ctx.stroke();
       }
-      /* center line dashed */
       ctx.setLineDash([4 * dpr, 4 * dpr]);
-      ctx.strokeStyle = 'rgba(80,160,80,.35)';
+      ctx.strokeStyle = 'rgba(0,150,180,.3)';
       ctx.beginPath(); ctx.moveTo(0, H/2); ctx.lineTo(W, H/2); ctx.stroke();
       ctx.setLineDash([]);
 
-      /* noise amount fluctuates */
       const noise = () => (Math.random() - .5) * 2;
 
-      /* L1 — gold AC wave */
+      /* L1 — cyan */
       ctx.lineWidth = 2 * dpr;
-      ctx.strokeStyle = '#FFD700';
-      ctx.shadowColor = 'rgba(255,215,0,.6)';
+      ctx.strokeStyle = '#00E5FF';
+      ctx.shadowColor = 'rgba(0,229,255,.6)';
       ctx.shadowBlur = 6 * dpr;
       ctx.beginPath();
       for (let x = 0; x < W; x++) {
-        const phase = (x / W) * Math.PI * 8 - t;
-        const amp   = H * .35;
-        const y     = H/2 - Math.sin(phase) * amp + noise() * dpr;
+        const y = H/2 - Math.sin((x / W) * Math.PI * 8 - t) * H * .35 + noise() * dpr;
         x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
       }
       ctx.stroke();
 
-      /* L2 — cyan, 120° offset */
-      ctx.strokeStyle = 'rgba(85,170,255,.7)';
-      ctx.shadowColor = 'rgba(85,170,255,.4)';
+      /* L2 — blue, 120° */
+      ctx.strokeStyle = 'rgba(68,119,255,.75)';
+      ctx.shadowColor = 'rgba(68,119,255,.4)';
       ctx.shadowBlur  = 4 * dpr;
       ctx.lineWidth   = 1.5 * dpr;
       ctx.beginPath();
       for (let x = 0; x < W; x++) {
-        const phase = (x / W) * Math.PI * 8 - t + (2 * Math.PI / 3);
-        const amp   = H * .28;
-        const y     = H/2 - Math.sin(phase) * amp + noise() * dpr;
+        const y = H/2 - Math.sin((x / W) * Math.PI * 8 - t + (2 * Math.PI / 3)) * H * .28 + noise() * dpr;
         x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
       }
       ctx.stroke();
 
-      /* L3 — green, 240° offset */
-      ctx.strokeStyle = 'rgba(80,200,80,.55)';
-      ctx.shadowColor = 'rgba(80,200,80,.35)';
+      /* L3 — purple, 240° */
+      ctx.strokeStyle = 'rgba(153,68,255,.6)';
+      ctx.shadowColor = 'rgba(153,68,255,.4)';
       ctx.lineWidth   = 1.2 * dpr;
       ctx.beginPath();
       for (let x = 0; x < W; x++) {
-        const phase = (x / W) * Math.PI * 8 - t + (4 * Math.PI / 3);
-        const amp   = H * .22;
-        const y     = H/2 - Math.sin(phase) * amp + noise() * dpr;
+        const y = H/2 - Math.sin((x / W) * Math.PI * 8 - t + (4 * Math.PI / 3)) * H * .22 + noise() * dpr;
         x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
       }
       ctx.stroke();
@@ -1623,7 +1259,6 @@
     }
     drawScope();
 
-    /* readout updates */
     const vEl = document.getElementById('voltVal');
     const wEl = document.getElementById('wattVal');
     const aEl = document.getElementById('ampVal');
@@ -1635,38 +1270,27 @@
     }, 900);
   })();
 
-  /* ═══ DEVRE KARTI ARKA PLAN ═══ */
+  /* ═══ DEVRE KARTI ═══ */
   (function() {
     const canvas = document.getElementById('circuitCanvas');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
-
-    function resize() {
-      canvas.width  = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-      buildCircuit();
-    }
-
     let nodes = [], pulses = [];
+
+    function resize() { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; buildCircuit(); }
 
     function buildCircuit() {
       nodes = []; pulses = [];
-      const W = canvas.width, H = canvas.height;
-      const step = 60;
-      /* generate grid nodes */
-      for (let x = step; x < W - step/2; x += step) {
-        for (let y = step; y < H - step/2; y += step) {
+      const W = canvas.width, H = canvas.height, step = 60;
+      for (let x = step; x < W - step/2; x += step)
+        for (let y = step; y < H - step/2; y += step)
           if (Math.random() > .4) nodes.push({ x, y });
-        }
-      }
-      /* connect neighbours */
       nodes.forEach(n => {
         n.links = nodes.filter(m => {
           const dx = m.x - n.x, dy = m.y - n.y;
           return m !== n && Math.abs(dx) + Math.abs(dy) === step && Math.random() > .3;
         });
       });
-      /* start pulses */
       for (let i = 0; i < 12; i++) spawnPulse();
     }
 
@@ -1675,81 +1299,44 @@
       const src = nodes[Math.floor(Math.random() * nodes.length)];
       if (!src.links || !src.links.length) return;
       const dst = src.links[Math.floor(Math.random() * src.links.length)];
-      pulses.push({ sx: src.x, sy: src.y, tx: dst.x, ty: dst.y, p: 0, speed: .008 + Math.random()*.012, next: dst });
+      pulses.push({ sx: src.x, sy: src.y, tx: dst.x, ty: dst.y, p: 0, speed: .008 + Math.random()*.012 });
     }
 
     function draw() {
       const W = canvas.width, H = canvas.height;
       ctx.clearRect(0, 0, W, H);
-
-      /* draw static traces */
       ctx.lineWidth = 1;
       nodes.forEach(n => {
         if (!n.links) return;
         n.links.forEach(m => {
-          ctx.strokeStyle = 'rgba(255,215,0,.07)';
-          ctx.beginPath();
-          ctx.moveTo(n.x, n.y);
-          /* right-angle routing */
-          ctx.lineTo(m.x, n.y);
-          ctx.lineTo(m.x, m.y);
-          ctx.stroke();
+          ctx.strokeStyle = 'rgba(0,229,255,.06)';
+          ctx.beginPath(); ctx.moveTo(n.x, n.y); ctx.lineTo(m.x, n.y); ctx.lineTo(m.x, m.y); ctx.stroke();
         });
       });
-
-      /* draw nodes */
       nodes.forEach(n => {
-        ctx.fillStyle = 'rgba(255,215,0,.18)';
+        ctx.fillStyle = 'rgba(0,229,255,.15)';
         ctx.beginPath(); ctx.arc(n.x, n.y, 2, 0, Math.PI * 2); ctx.fill();
       });
-
-      /* animate pulses */
       pulses.forEach((pulse, i) => {
         pulse.p += pulse.speed;
         const px = pulse.sx + (pulse.tx - pulse.sx) * Math.min(pulse.p, 1);
         const py = pulse.sy;
-
-        /* glow dot */
         const grd = ctx.createRadialGradient(px, py, 0, px, py, 8);
-        grd.addColorStop(0, 'rgba(255,215,0,.9)');
-        grd.addColorStop(1, 'rgba(255,215,0,0)');
+        grd.addColorStop(0, 'rgba(0,229,255,.9)');
+        grd.addColorStop(1, 'rgba(0,229,255,0)');
         ctx.fillStyle = grd;
         ctx.beginPath(); ctx.arc(px, py, 8, 0, Math.PI * 2); ctx.fill();
-
-        /* trail */
-        ctx.strokeStyle = 'rgba(255,215,0,.4)';
-        ctx.lineWidth = 1.5;
-        ctx.beginPath();
-        ctx.moveTo(pulse.sx, pulse.sy);
-        ctx.lineTo(px, pulse.sy);
-        ctx.stroke();
-
-        if (pulse.p >= 1) {
-          pulses.splice(i, 1);
-          spawnPulse();
-        }
+        ctx.strokeStyle = 'rgba(0,229,255,.35)'; ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.moveTo(pulse.sx, pulse.sy); ctx.lineTo(px, pulse.sy); ctx.stroke();
+        if (pulse.p >= 1) { pulses.splice(i, 1); spawnPulse(); }
       });
-
       requestAnimationFrame(draw);
     }
-
-    window.addEventListener('resize', () => { resize(); });
-    resize();
-    draw();
+    window.addEventListener('resize', resize);
+    resize(); draw();
   })();
 
-  /* ─── Desktop 4th & 5th service cards: hide on mobile ─── */
-  function toggleWideCards() {
-    const isDesktop = window.innerWidth >= 1024;
-    ['s4','s5'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.style.display = isDesktop ? '' : 'none';
-    });
-  }
-  toggleWideCards();
-  window.addEventListener('resize', toggleWideCards);
-
-  /* ─── Active nav (scroll-based) ─── */
+  /* ═══ SCROLL NAV ═══ */
   const secMap = [
     { id:'ana-sayfa',  mNav:'nav-ana', dNav:'tnav-ana' },
     { id:'hizmetler',  mNav:'nav-hiz', dNav:'tnav-hiz' },
@@ -1757,56 +1344,56 @@
     { id:'galeri',     mNav:'nav-gal', dNav:'tnav-gal' },
     { id:'iletisim',   mNav:'nav-ilt', dNav:'tnav-ilt' },
   ];
-
   function updateNav() {
     const offset = window.innerWidth >= 1024 ? 90 : 80;
     let cur = secMap[0];
-    secMap.forEach(s => {
-      const el = document.getElementById(s.id);
-      if (el && window.scrollY >= el.offsetTop - offset) cur = s;
-    });
-
-    /* mobile bottom nav */
-    document.querySelectorAll('.nav-item').forEach(n => {
-      n.classList.remove('active');
-      const svg = n.querySelector('svg');
-      if (svg) { svg.style.stroke = '#555'; }
-    });
+    secMap.forEach(s => { const el = document.getElementById(s.id); if (el && window.scrollY >= el.offsetTop - offset) cur = s; });
+    document.querySelectorAll('.nav-item').forEach(n => { n.classList.remove('active'); const svg = n.querySelector('svg'); if (svg) svg.style.stroke = '#555'; });
     const mActive = document.getElementById(cur.mNav);
-    if (mActive) {
-      mActive.classList.add('active');
-      const svg = mActive.querySelector('svg');
-      if (svg) svg.style.stroke = '#FFD700';
-    }
-
-    /* desktop top nav */
+    if (mActive) { mActive.classList.add('active'); const svg = mActive.querySelector('svg'); if (svg) svg.style.stroke = '#00E5FF'; }
     document.querySelectorAll('.top-nav-links a').forEach(a => a.classList.remove('active'));
     const dActive = document.getElementById(cur.dNav);
     if (dActive) dActive.classList.add('active');
   }
-
   window.addEventListener('scroll', updateNav, { passive: true });
   updateNav();
 
-  /* ─── Spark click effect ─── */
+  /* ═══ SPARK ═══ */
   const sparkStyle = document.createElement('style');
   sparkStyle.textContent = '@keyframes spark { to { transform:translate(-50%,-50%) scale(5); opacity:0; } }';
   document.head.appendChild(sparkStyle);
-
   document.querySelectorAll('.service-card').forEach(card => {
     card.addEventListener('click', function(e) {
       const spark = document.createElement('div');
-      spark.style.cssText = `
-        position:absolute; width:6px; height:6px; border-radius:50%;
-        background:#FFD700; pointer-events:none; z-index:9;
-        left:${e.offsetX}px; top:${e.offsetY}px;
-        transform:translate(-50%,-50%);
-        animation:spark .45s ease forwards;
-      `;
+      spark.style.cssText = `position:absolute;width:6px;height:6px;border-radius:50%;background:#00E5FF;pointer-events:none;z-index:9;left:${e.offsetX}px;top:${e.offsetY}px;transform:translate(-50%,-50%);animation:spark .45s ease forwards;`;
       this.appendChild(spark);
       setTimeout(() => spark.remove(), 450);
     });
   });
+
+  /* ═══ FAQ ACCORDION ═══ */
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  /* ═══ KVKK ═══ */
+  (function() {
+    const banner = document.getElementById('kvkk');
+    if (!banner) return;
+    if (!localStorage.getItem('kvkk')) banner.style.display = 'flex';
+    document.getElementById('kvkkAccept').addEventListener('click', () => { localStorage.setItem('kvkk','1'); banner.remove(); });
+    document.getElementById('kvkkReject').addEventListener('click', () => { localStorage.setItem('kvkk','0'); banner.remove(); });
+  })();
+
+  /* ═══ PWA SERVICE WORKER ═══ */
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  }
 </script>
 </body>
 </html>

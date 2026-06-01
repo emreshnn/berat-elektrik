@@ -1,0 +1,17 @@
+{
+  "name": "Berat Elektrik",
+  "short_name": "Berat Elektrik",
+  "description": "Ankara'da güvenilir elektrik hizmetleri. 7/24 acil servis.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#090e1a",
+  "theme_color": "#090e1a",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='32' fill='%23090e1a'/%3E%3Cpolygon points='108,18 48,108 90,108 84,174 144,84 102,84' fill='%2300E5FF'/%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    }
+  ]
+}
