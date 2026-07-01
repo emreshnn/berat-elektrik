@@ -5,91 +5,84 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Berat Elektrik – Admin Panel</title>
   <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --cyan: #00E5FF; --cyan2: #00CCEE; --black: #090e1a;
-      --dark: #0c1220; --card: #111827; --border: #1e2d42;
-      --text: #ffffff; --muted: #6b7fa0; --green: #22c55e;
-      --red: #ef4444; --purple: #9944FF; --blue: #4477FF;
+      --cyan: #00E5FF; --black: #090e1a; --dark: #0c1220;
+      --card: #111827; --border: #1e2d42; --text: #ffffff;
+      --muted: #6b7fa0; --green: #22c55e; --red: #ef4444;
     }
     body { background: var(--black); color: var(--text); font-family: system-ui, sans-serif; min-height: 100vh; }
 
-    /* LOGIN */
-    #loginScreen {
-      display: flex; align-items: center; justify-content: center;
-      min-height: 100vh; padding: 24px;
-    }
-    .login-box {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 16px; padding: 40px; width: 100%; max-width: 400px;
-    }
-    .login-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 32px; }
+    /* ── LOGIN ── */
+    #loginScreen { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 24px; }
+    .login-box { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; width: 100%; max-width: 380px; }
+    .login-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
     .login-logo svg { width: 36px; height: 36px; }
-    .login-logo-text { font-size: 1.2rem; font-weight: 700; letter-spacing: 3px; color: var(--cyan); }
-    .login-title { font-size: 0.85rem; color: var(--muted); margin-bottom: 24px; letter-spacing: 1px; }
+    .login-logo-text { font-size: 1.1rem; font-weight: 700; letter-spacing: 3px; color: var(--cyan); }
+    .login-sub { font-size: 0.78rem; color: var(--muted); margin-bottom: 28px; letter-spacing: 1px; }
+    .err-msg { color: var(--red); font-size: 0.82rem; margin-bottom: 10px; display: none; padding: 8px 12px; background: rgba(239,68,68,.1); border-radius: 6px; border: 1px solid rgba(239,68,68,.2); }
+    .field-label { font-size: 0.72rem; color: var(--muted); letter-spacing: 1px; margin-bottom: 6px; display: block; }
+    .field-input { width: 100%; background: var(--dark); border: 1px solid var(--border); color: var(--text); padding: 12px 16px; border-radius: 10px; font-size: 0.95rem; outline: none; margin-bottom: 14px; }
+    .field-input:focus { border-color: var(--cyan); }
+    .btn-primary { width: 100%; background: var(--cyan); color: #000; border: none; padding: 14px; border-radius: 10px; font-weight: 700; font-size: 1rem; cursor: pointer; letter-spacing: 1px; }
+    .btn-primary:hover { opacity: .85; }
+    .btn-primary:disabled { opacity: .5; cursor: not-allowed; }
 
-    /* ADMIN LAYOUT */
+    /* ── ADMIN LAYOUT ── */
     #adminScreen { display: none; }
     .admin-header {
       background: var(--dark); border-bottom: 1px solid var(--border);
-      padding: 16px 24px; display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 24px; display: flex; align-items: center; justify-content: space-between;
       position: sticky; top: 0; z-index: 100;
     }
-    .admin-header-left { display: flex; align-items: center; gap: 12px; }
     .admin-logo { display: flex; align-items: center; gap: 10px; }
-    .admin-logo svg { width: 28px; height: 28px; }
-    .admin-logo-text { font-weight: 700; letter-spacing: 2px; color: var(--cyan); font-size: 1rem; }
-    .admin-badge { background: rgba(0,229,255,.1); border: 1px solid rgba(0,229,255,.2); color: var(--cyan); font-size: 0.7rem; padding: 3px 8px; border-radius: 20px; letter-spacing: 1px; }
-    .btn-logout { background: rgba(239,68,68,.1); border: 1px solid rgba(239,68,68,.3); color: var(--red); padding: 6px 14px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; }
-    .btn-logout:hover { background: rgba(239,68,68,.2); }
+    .admin-logo svg { width: 26px; height: 26px; }
+    .admin-logo-text { font-weight: 700; letter-spacing: 2px; color: var(--cyan); }
+    .admin-badge { background: rgba(0,229,255,.1); border: 1px solid rgba(0,229,255,.2); color: var(--cyan); font-size: 0.7rem; padding: 3px 8px; border-radius: 20px; letter-spacing: 1px; margin-left: 8px; }
+    .btn-logout { background: rgba(239,68,68,.1); border: 1px solid rgba(239,68,68,.3); color: var(--red); padding: 7px 14px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; }
 
     .admin-body { display: flex; min-height: calc(100vh - 65px); }
 
-    /* SIDEBAR */
-    .sidebar {
-      width: 220px; background: var(--dark); border-right: 1px solid var(--border);
-      padding: 24px 0; flex-shrink: 0;
-    }
-    .sidebar-label { font-size: 0.65rem; color: var(--muted); letter-spacing: 2px; padding: 0 20px; margin-bottom: 8px; margin-top: 16px; }
-    .sidebar-link {
-      display: flex; align-items: center; gap: 10px; padding: 10px 20px;
-      color: var(--muted); cursor: pointer; border-left: 3px solid transparent;
-      transition: all .2s; font-size: 0.875rem;
-    }
+    /* ── SIDEBAR ── */
+    .sidebar { width: 210px; background: var(--dark); border-right: 1px solid var(--border); padding: 20px 0; flex-shrink: 0; }
+    .sidebar-label { font-size: 0.65rem; color: var(--muted); letter-spacing: 2px; padding: 0 18px; margin: 16px 0 6px; }
+    .sidebar-link { display: flex; align-items: center; gap: 10px; padding: 10px 18px; color: var(--muted); cursor: pointer; border-left: 3px solid transparent; transition: all .2s; font-size: 0.875rem; }
     .sidebar-link:hover { color: var(--text); background: rgba(255,255,255,.03); }
     .sidebar-link.active { color: var(--cyan); border-left-color: var(--cyan); background: rgba(0,229,255,.05); }
-    .sidebar-icon { width: 18px; text-align: center; }
 
-    /* MAIN CONTENT */
-    .admin-main { flex: 1; padding: 32px; overflow-y: auto; }
+    /* ── MAIN ── */
+    .admin-main { flex: 1; padding: 28px; overflow-y: auto; max-width: 100%; }
     .section-panel { display: none; }
     .section-panel.active { display: block; }
-    .panel-title { font-size: 1.2rem; font-weight: 700; letter-spacing: 3px; color: var(--cyan); margin-bottom: 24px; }
+    .panel-title { font-size: 1.1rem; font-weight: 700; letter-spacing: 3px; color: var(--cyan); margin-bottom: 24px; }
 
-    /* FORM ELEMENTS */
-    .form-group { margin-bottom: 18px; }
-    .form-label { font-size: 0.75rem; color: var(--muted); letter-spacing: 1px; margin-bottom: 6px; display: block; }
-    .form-input, .form-textarea, .form-select {
-      width: 100%; background: var(--dark); border: 1px solid var(--border);
-      color: var(--text); padding: 10px 14px; border-radius: 8px; font-size: 0.9rem;
-      outline: none; transition: border-color .2s; font-family: inherit;
-    }
-    .form-input:focus, .form-textarea:focus { border-color: var(--cyan2); }
-    .form-textarea { resize: vertical; min-height: 80px; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    /* ── FORMS ── */
+    .form-group { margin-bottom: 16px; }
+    .form-label { font-size: 0.72rem; color: var(--muted); letter-spacing: 1px; margin-bottom: 6px; display: block; }
+    .form-input, .form-textarea { width: 100%; background: var(--dark); border: 1px solid var(--border); color: var(--text); padding: 10px 14px; border-radius: 8px; font-size: 0.9rem; outline: none; font-family: inherit; }
+    .form-input:focus, .form-textarea:focus { border-color: var(--cyan); }
+    .form-textarea { resize: vertical; min-height: 75px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
-    /* CARDS GRID */
-    .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+    /* ── CARDS ── */
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 18px; }
     .edit-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-    .edit-card-header { padding: 12px 16px; background: rgba(0,229,255,.05); border-bottom: 1px solid var(--border); font-size: 0.75rem; color: var(--cyan); letter-spacing: 2px; font-weight: 700; }
-    .edit-card-body { padding: 16px; }
-    .img-preview { width: 100%; height: 140px; object-fit: cover; border-radius: 8px; margin-bottom: 12px; background: var(--dark); border: 1px solid var(--border); }
-    .img-preview-placeholder { width: 100%; height: 140px; display: flex; align-items: center; justify-content: center; background: var(--dark); border-radius: 8px; margin-bottom: 12px; color: var(--muted); font-size: 0.8rem; border: 1px dashed var(--border); }
+    .edit-card-header { padding: 10px 16px; background: rgba(0,229,255,.05); border-bottom: 1px solid var(--border); font-size: 0.72rem; color: var(--cyan); letter-spacing: 2px; font-weight: 700; }
+    .edit-card-body { padding: 14px; }
+    .img-preview { width: 100%; height: 130px; object-fit: cover; border-radius: 6px; margin-bottom: 10px; background: var(--dark); border: 1px solid var(--border); }
+    .review-card-edit, .faq-card-edit { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 14px; }
+    .sub-title { font-size: 0.72rem; color: var(--cyan); letter-spacing: 2px; font-weight: 700; margin-bottom: 12px; }
 
-    /* SAVE BUTTON */
-    .save-bar { position: sticky; bottom: 0; background: var(--dark); border-top: 1px solid var(--border); padding: 16px 32px; display: flex; align-items: center; gap: 16px; }
-    .btn-save { background: var(--cyan); color: #000; border: none; padding: 12px 32px; border-radius: 8px; font-weight: 700; font-size: 0.9rem; cursor: pointer; letter-spacing: 1px; transition: opacity .2s; }
+    /* ── SAVE BAR ── */
+    .save-bar { position: sticky; bottom: 0; background: var(--dark); border-top: 1px solid var(--border); padding: 14px 28px; display: flex; align-items: center; gap: 14px; }
+    .btn-save { background: var(--cyan); color: #000; border: none; padding: 11px 28px; border-radius: 8px; font-weight: 700; font-size: 0.9rem; cursor: pointer; letter-spacing: 1px; }
     .btn-save:hover { opacity: .85; }
     .btn-save:disabled { opacity: .5; cursor: not-allowed; }
     .save-status { font-size: 0.85rem; }
@@ -97,43 +90,16 @@
     .save-status.error { color: var(--red); }
     .save-status.loading { color: var(--muted); }
 
-    /* GENERAL INPUTS */
-    input[type="password"], input[type="text"] {
-      width: 100%; background: var(--dark); border: 1px solid var(--border);
-      color: var(--text); padding: 12px 16px; border-radius: 10px; font-size: 0.95rem;
-      outline: none; transition: border-color .2s; margin-bottom: 14px;
-    }
-    input[type="password"]:focus, input[type="text"]:focus { border-color: var(--cyan2); }
-    .btn-primary {
-      width: 100%; background: var(--cyan); color: #000; border: none;
-      padding: 14px; border-radius: 10px; font-weight: 700; font-size: 1rem;
-      cursor: pointer; letter-spacing: 1px; transition: opacity .2s;
-    }
-    .btn-primary:hover { opacity: .85; }
-    .err-msg { color: var(--red); font-size: 0.82rem; margin-bottom: 12px; display: none; }
-
-    /* REVIEW CARD */
-    .review-edit-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 16px; }
-    .review-edit-title { font-size: 0.75rem; color: var(--cyan); letter-spacing: 2px; font-weight: 700; margin-bottom: 12px; }
-
-    /* FAQ CARD */
-    .faq-edit-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 16px; }
-    .faq-edit-num { font-size: 0.75rem; color: var(--cyan); letter-spacing: 2px; font-weight: 700; margin-bottom: 12px; }
-
-    /* TOKEN NOTE */
-    .token-note { background: rgba(0,229,255,.06); border: 1px solid rgba(0,229,255,.2); border-radius: 8px; padding: 12px 14px; font-size: 0.78rem; color: var(--muted); line-height: 1.6; margin-bottom: 16px; }
-    .token-note a { color: var(--cyan); }
-
     @media (max-width: 768px) {
       .sidebar { display: none; }
       .form-row { grid-template-columns: 1fr; }
-      .admin-main { padding: 20px; }
+      .admin-main { padding: 16px; }
     }
   </style>
 </head>
 <body>
 
-<!-- LOGIN SCREEN -->
+<!-- ── LOGIN ── -->
 <div id="loginScreen">
   <div class="login-box">
     <div class="login-logo">
@@ -141,26 +107,20 @@
         <rect width="32" height="32" rx="6" fill="#090e1a"/>
         <polygon points="18,3 8,18 15,18 14,29 24,14 17,14" fill="#00E5FF"/>
       </svg>
-      <div>
-        <div class="login-logo-text">BERAT ELEKTRİK</div>
-      </div>
+      <span class="login-logo-text">BERAT ELEKTRİK</span>
     </div>
-    <div class="login-title">ADMİN PANELİ · GİRİŞ</div>
-    <div class="err-msg" id="errMsg">Şifre veya token hatalı.</div>
-    <input type="password" id="loginPass" placeholder="Şifre" />
-    <div class="token-note">
-      GitHub Token: <a href="https://github.com/settings/tokens/new?scopes=repo&description=BeratElektrik" target="_blank">buradan oluştur</a> (repo yetkisi seç, 90 gün)
-    </div>
-    <input type="text" id="loginToken" placeholder="GitHub Token (ghp_... veya gho_...)" />
-    <button class="btn-primary" onclick="doLogin()">GİRİŞ YAP</button>
+    <div class="login-sub">YÖNETİM PANELİ</div>
+    <div class="err-msg" id="errMsg">Şifre hatalı, tekrar dene.</div>
+    <label class="field-label">ŞİFRE</label>
+    <input type="password" class="field-input" id="loginPass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()" />
+    <button class="btn-primary" id="loginBtn" onclick="doLogin()">GİRİŞ YAP</button>
   </div>
 </div>
 
-<!-- ADMIN SCREEN -->
+<!-- ── ADMIN ── -->
 <div id="adminScreen">
-
   <div class="admin-header">
-    <div class="admin-header-left">
+    <div style="display:flex;align-items:center;gap:8px;">
       <div class="admin-logo">
         <svg viewBox="0 0 32 32" fill="none">
           <rect width="32" height="32" rx="6" fill="#090e1a"/>
@@ -170,57 +130,38 @@
       </div>
       <span class="admin-badge">ADMİN</span>
     </div>
-    <button class="btn-logout" onclick="doLogout()">Çıkış</button>
+    <button class="btn-logout" onclick="doLogout()">Çıkış Yap</button>
   </div>
 
   <div class="admin-body">
-
-    <!-- SIDEBAR -->
     <nav class="sidebar">
-      <div class="sidebar-label">SAYFALAR</div>
-      <div class="sidebar-link active" onclick="showPanel('galeri', this)">
-        <span class="sidebar-icon">🖼️</span> Galeri
-      </div>
-      <div class="sidebar-link" onclick="showPanel('hizmetler', this)">
-        <span class="sidebar-icon">⚡</span> Hizmetler
-      </div>
-      <div class="sidebar-link" onclick="showPanel('yorumlar', this)">
-        <span class="sidebar-icon">⭐</span> Müşteri Yorumları
-      </div>
-      <div class="sidebar-link" onclick="showPanel('hakkimizda', this)">
-        <span class="sidebar-icon">ℹ️</span> Hakkımızda
-      </div>
-      <div class="sidebar-link" onclick="showPanel('sss', this)">
-        <span class="sidebar-icon">❓</span> SSS
-      </div>
-      <div class="sidebar-label">İLETİŞİM</div>
-      <div class="sidebar-link" onclick="showPanel('iletisim', this)">
-        <span class="sidebar-icon">📞</span> İletişim Bilgileri
-      </div>
+      <div class="sidebar-label">BÖLÜMLER</div>
+      <div class="sidebar-link active" onclick="showPanel('galeri',this)">🖼️ &nbsp;Galeri</div>
+      <div class="sidebar-link" onclick="showPanel('hizmetler',this)">⚡ &nbsp;Hizmetler</div>
+      <div class="sidebar-link" onclick="showPanel('yorumlar',this)">⭐ &nbsp;Müşteri Yorumları</div>
+      <div class="sidebar-link" onclick="showPanel('hakkimizda',this)">ℹ️ &nbsp;Hakkımızda</div>
+      <div class="sidebar-link" onclick="showPanel('sss',this)">❓ &nbsp;SSS</div>
+      <div class="sidebar-label">DİĞER</div>
+      <div class="sidebar-link" onclick="showPanel('iletisim',this)">📞 &nbsp;İletişim</div>
     </nav>
 
-    <!-- MAIN -->
-    <div class="admin-main" id="adminMain">
+    <div class="admin-main">
 
-      <!-- GALERİ -->
       <div class="section-panel active" id="panel-galeri">
         <div class="panel-title">🖼️ GALERİ</div>
         <div class="cards-grid" id="galleryCards"></div>
       </div>
 
-      <!-- HİZMETLER -->
       <div class="section-panel" id="panel-hizmetler">
         <div class="panel-title">⚡ HİZMETLER</div>
         <div id="serviceCards"></div>
       </div>
 
-      <!-- YORUMLAR -->
       <div class="section-panel" id="panel-yorumlar">
         <div class="panel-title">⭐ MÜŞTERİ YORUMLARI</div>
         <div id="reviewCards"></div>
       </div>
 
-      <!-- HAKKIMIZDA -->
       <div class="section-panel" id="panel-hakkimizda">
         <div class="panel-title">ℹ️ HAKKIMIZDA</div>
         <div class="form-group">
@@ -230,95 +171,141 @@
         <div class="form-row">
           <div class="form-group">
             <label class="form-label">YIL DENEYİM</label>
-            <input type="text" class="form-input" id="aboutYears" placeholder="5+" />
+            <input type="text" class="form-input" id="aboutYears" />
           </div>
           <div class="form-group">
             <label class="form-label">TAMAMLANAN İŞ</label>
-            <input type="text" class="form-input" id="aboutJobs" placeholder="300+" />
+            <input type="text" class="form-input" id="aboutJobs" />
           </div>
         </div>
       </div>
 
-      <!-- SSS -->
       <div class="section-panel" id="panel-sss">
         <div class="panel-title">❓ SIK SORULAN SORULAR</div>
         <div id="faqCards"></div>
       </div>
 
-      <!-- İLETİŞİM -->
       <div class="section-panel" id="panel-iletisim">
-        <div class="panel-title">📞 İLETİŞİM BİLGİLERİ</div>
+        <div class="panel-title">📞 İLETİŞİM</div>
         <div class="form-row">
           <div class="form-group">
             <label class="form-label">TELEFON 1</label>
-            <input type="text" class="form-input" id="phone1" placeholder="0505 977 06 48" />
+            <input type="text" class="form-input" id="phone1" />
           </div>
           <div class="form-group">
             <label class="form-label">TELEFON 2</label>
-            <input type="text" class="form-input" id="phone2" placeholder="0544 944 90 17" />
+            <input type="text" class="form-input" id="phone2" />
           </div>
         </div>
         <div class="form-group">
-          <label class="form-label">WHATSAPP NUMARASI (başında 90 ile)</label>
-          <input type="text" class="form-input" id="whatsapp" placeholder="905059770648" />
+          <label class="form-label">WHATSAPP (başında 90 ile, boşluksuz)</label>
+          <input type="text" class="form-input" id="whatsapp" />
         </div>
       </div>
 
     </div>
   </div>
 
-  <!-- SAVE BAR -->
   <div class="save-bar">
     <button class="btn-save" id="saveBtn" onclick="saveContent()">💾 KAYDET &amp; YAYINLA</button>
     <span class="save-status" id="saveStatus"></span>
   </div>
-
 </div>
 
 <script>
-  const REPO = 'emreshnn/berat-elektrik';
-  const PASS_HASH = '67a5eaa8bce0215b943493d139e34a6475312f68ad3ca963275059cbeb2dd008'; // berat2026
-  let ghToken = '';
+  /* ─────────────────────────────────────────
+     FIREBASE CONFIG — buraya yapıştır
+  ───────────────────────────────────────── */
+  const firebaseConfig = {
+    apiKey:            "BURAYA_API_KEY",
+    authDomain:        "BURAYA_AUTH_DOMAIN",
+    projectId:         "BURAYA_PROJECT_ID",
+    storageBucket:     "BURAYA_STORAGE_BUCKET",
+    messagingSenderId: "BURAYA_SENDER_ID",
+    appId:             "BURAYA_APP_ID"
+  };
+
+  /* Admin e-postası — Firebase Auth'ta oluşturacağın hesap */
+  const ADMIN_EMAIL = 'admin@beratelektrik06.com.tr';
+  /* ───────────────────────────────────────── */
+
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db   = firebase.firestore();
+
   let content = {};
 
-  async function sha256(msg) {
-    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(msg));
-    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
-  }
-
+  /* ── GİRİŞ ── */
   async function doLogin() {
     const pass = document.getElementById('loginPass').value;
-    const token = document.getElementById('loginToken').value.trim();
-    const hash = await sha256(pass);
-
-    // Verify token works with GitHub
-    const test = await fetch(`https://api.github.com/repos/${REPO}`, {
-      headers: { Authorization: `token ${token}` }
-    });
-
-    if (hash !== PASS_HASH || !test.ok) {
-      document.getElementById('errMsg').style.display = 'block';
-      return;
+    const btn  = document.getElementById('loginBtn');
+    const err  = document.getElementById('errMsg');
+    err.style.display = 'none';
+    btn.disabled = true;
+    btn.textContent = 'Giriş yapılıyor...';
+    try {
+      await auth.signInWithEmailAndPassword(ADMIN_EMAIL, pass);
+    } catch (e) {
+      err.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'GİRİŞ YAP';
     }
-
-    ghToken = token;
-    sessionStorage.setItem('be_token', token);
-    document.getElementById('loginScreen').style.display = 'none';
-    document.getElementById('adminScreen').style.display = 'block';
-    await loadContent();
   }
 
-  function doLogout() {
-    sessionStorage.removeItem('be_token');
-    location.reload();
+  /* ── ÇIKIŞ ── */
+  async function doLogout() {
+    await auth.signOut();
   }
 
+  /* ── AUTH STATE ── */
+  auth.onAuthStateChanged(async user => {
+    if (user) {
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('adminScreen').style.display = 'block';
+      await loadContent();
+    } else {
+      document.getElementById('loginScreen').style.display = 'flex';
+      document.getElementById('adminScreen').style.display = 'none';
+      document.getElementById('loginBtn').disabled = false;
+      document.getElementById('loginBtn').textContent = 'GİRİŞ YAP';
+    }
+  });
+
+  /* ── İÇERİK YÜKLEMİ ── */
   async function loadContent() {
-    const res = await fetch(`https://raw.githubusercontent.com/${REPO}/main/content.json?v=` + Date.now());
-    content = await res.json();
+    const snap = await db.collection('site').doc('content').get();
+    if (snap.exists) {
+      content = snap.data();
+    } else {
+      /* İlk kurulum — varsayılan içerik yükle */
+      const res = await fetch('../content.json');
+      content = await res.json();
+      await db.collection('site').doc('content').set(content);
+    }
     renderAll();
   }
 
+  /* ── KAYDET ── */
+  async function saveContent() {
+    const btn    = document.getElementById('saveBtn');
+    const status = document.getElementById('saveStatus');
+    btn.disabled = true;
+    status.className = 'save-status loading';
+    status.textContent = 'Kaydediliyor...';
+    try {
+      const newContent = collectContent();
+      await db.collection('site').doc('content').set(newContent);
+      content = newContent;
+      status.className = 'save-status success';
+      status.textContent = '✅ Kaydedildi! Site anında güncellendi.';
+    } catch (e) {
+      status.className = 'save-status error';
+      status.textContent = '❌ Hata: ' + e.message;
+    }
+    btn.disabled = false;
+  }
+
+  /* ── RENDER ── */
   function renderAll() {
     renderGallery();
     renderServices();
@@ -329,16 +316,14 @@
   }
 
   function renderGallery() {
-    const container = document.getElementById('galleryCards');
-    container.innerHTML = content.gallery.map((item, i) => `
+    document.getElementById('galleryCards').innerHTML = content.gallery.map((item, i) => `
       <div class="edit-card">
         <div class="edit-card-header">GALERİ ${i + 1}</div>
         <div class="edit-card-body">
-          <img class="img-preview" id="gimg-preview-${i}" src="${item.img}" onerror="this.style.display='none'" />
+          <img class="img-preview" id="gprev-${i}" src="${item.img}" onerror="this.src=''" />
           <div class="form-group">
             <label class="form-label">GÖRSEL URL</label>
-            <input type="text" class="form-input" id="gimg-${i}" value="${item.img}"
-              oninput="updateImgPreview(${i})" placeholder="https://..." />
+            <input type="text" class="form-input" id="gimg-${i}" value="${item.img}" oninput="document.getElementById('gprev-${i}').src=this.value" />
           </div>
           <div class="form-group">
             <label class="form-label">BAŞLIK</label>
@@ -353,35 +338,24 @@
             <input type="text" class="form-input" id="gtag-${i}" value="${item.tag}" />
           </div>
         </div>
-      </div>
-    `).join('');
-  }
-
-  function updateImgPreview(i) {
-    const url = document.getElementById(`gimg-${i}`).value;
-    const img = document.getElementById(`gimg-preview-${i}`);
-    img.style.display = 'block';
-    img.src = url;
+      </div>`).join('');
   }
 
   function renderServices() {
-    const container = document.getElementById('serviceCards');
-    container.innerHTML = content.services.map((item, i) => `
-      <div class="review-edit-card">
-        <div class="review-edit-title">HİZMET ${i + 1}</div>
+    document.getElementById('serviceCards').innerHTML = content.services.map((item, i) => `
+      <div class="review-card-edit">
+        <div class="sub-title">HİZMET ${i + 1}</div>
         <div class="form-group">
           <label class="form-label">HİZMET ADI</label>
           <input type="text" class="form-input" id="sname-${i}" value="${item.name}" />
         </div>
-      </div>
-    `).join('');
+      </div>`).join('');
   }
 
   function renderReviews() {
-    const container = document.getElementById('reviewCards');
-    container.innerHTML = content.reviews.map((item, i) => `
-      <div class="review-edit-card">
-        <div class="review-edit-title">YORUM ${i + 1}</div>
+    document.getElementById('reviewCards').innerHTML = content.reviews.map((item, i) => `
+      <div class="review-card-edit">
+        <div class="sub-title">YORUM ${i + 1}</div>
         <div class="form-row">
           <div class="form-group">
             <label class="form-label">AD SOYAD</label>
@@ -396,68 +370,61 @@
           <label class="form-label">YORUM METNİ</label>
           <textarea class="form-textarea" id="rtext-${i}">${item.text}</textarea>
         </div>
-      </div>
-    `).join('');
+      </div>`).join('');
   }
 
   function renderAbout() {
-    document.getElementById('aboutText').value = content.about.text;
+    document.getElementById('aboutText').value  = content.about.text;
     document.getElementById('aboutYears').value = content.about.years;
-    document.getElementById('aboutJobs').value = content.about.jobs;
+    document.getElementById('aboutJobs').value  = content.about.jobs;
   }
 
   function renderFaq() {
-    const container = document.getElementById('faqCards');
-    container.innerHTML = content.faq.map((item, i) => `
-      <div class="faq-edit-card">
-        <div class="faq-edit-num">SORU ${i + 1}</div>
+    document.getElementById('faqCards').innerHTML = content.faq.map((item, i) => `
+      <div class="faq-card-edit">
+        <div class="sub-title">SORU ${i + 1}</div>
         <div class="form-group">
           <label class="form-label">SORU</label>
-          <input type="text" class="form-input" id="fq-${i}" value="${item.q}" />
+          <input type="text" class="form-input" id="fq-${i}" value="${item.q.replace(/"/g,'&quot;')}" />
         </div>
         <div class="form-group">
           <label class="form-label">CEVAP</label>
           <textarea class="form-textarea" id="fa-${i}">${item.a}</textarea>
         </div>
-      </div>
-    `).join('');
+      </div>`).join('');
   }
 
   function renderContact() {
-    document.getElementById('phone1').value = content.phone1;
-    document.getElementById('phone2').value = content.phone2;
-    document.getElementById('whatsapp').value = content.whatsapp;
+    document.getElementById('phone1').value    = content.phone1;
+    document.getElementById('phone2').value    = content.phone2;
+    document.getElementById('whatsapp').value  = content.whatsapp;
   }
 
+  /* ── COLLECT ── */
   function collectContent() {
-    const gallery = content.gallery.map((_, i) => ({
-      img: document.getElementById(`gimg-${i}`).value,
-      title: document.getElementById(`gtitle-${i}`).value,
-      desc: document.getElementById(`gdesc-${i}`).value,
-      tag: document.getElementById(`gtag-${i}`).value,
-    }));
-    const services = content.services.map((_, i) => ({
-      name: document.getElementById(`sname-${i}`).value
-    }));
-    const reviews = content.reviews.map((item, i) => ({
-      name: document.getElementById(`rname-${i}`).value,
-      initial: document.getElementById(`rname-${i}`).value.charAt(0).toUpperCase(),
-      color: item.color,
-      date: document.getElementById(`rdate-${i}`).value,
-      text: document.getElementById(`rtext-${i}`).value,
-    }));
     return {
-      phone1: document.getElementById('phone1').value,
-      phone2: document.getElementById('phone2').value,
-      whatsapp: document.getElementById('whatsapp').value,
-      hero: content.hero,
-      services,
-      gallery,
-      reviews,
+      phone1:    document.getElementById('phone1').value,
+      phone2:    document.getElementById('phone2').value,
+      whatsapp:  document.getElementById('whatsapp').value,
+      hero:      content.hero,
+      services:  content.services.map((_, i) => ({ name: document.getElementById(`sname-${i}`).value })),
+      gallery:   content.gallery.map((_, i) => ({
+        img:   document.getElementById(`gimg-${i}`).value,
+        title: document.getElementById(`gtitle-${i}`).value,
+        desc:  document.getElementById(`gdesc-${i}`).value,
+        tag:   document.getElementById(`gtag-${i}`).value,
+      })),
+      reviews: content.reviews.map((item, i) => ({
+        name:    document.getElementById(`rname-${i}`).value,
+        initial: document.getElementById(`rname-${i}`).value.charAt(0).toUpperCase(),
+        color:   item.color,
+        date:    document.getElementById(`rdate-${i}`).value,
+        text:    document.getElementById(`rtext-${i}`).value,
+      })),
       about: {
-        text: document.getElementById('aboutText').value,
+        text:  document.getElementById('aboutText').value,
         years: document.getElementById('aboutYears').value,
-        jobs: document.getElementById('aboutJobs').value,
+        jobs:  document.getElementById('aboutJobs').value,
       },
       faq: content.faq.map((_, i) => ({
         q: document.getElementById(`fq-${i}`).value,
@@ -466,70 +433,12 @@
     };
   }
 
-  async function saveContent() {
-    const btn = document.getElementById('saveBtn');
-    const status = document.getElementById('saveStatus');
-    btn.disabled = true;
-    status.className = 'save-status loading';
-    status.textContent = 'Kaydediliyor...';
-
-    try {
-      const newContent = collectContent();
-      const jsonStr = JSON.stringify(newContent, null, 2);
-      const encoded = btoa(unescape(encodeURIComponent(jsonStr)));
-
-      // Get current SHA
-      const shaRes = await fetch(`https://api.github.com/repos/${REPO}/contents/content.json`, {
-        headers: { Authorization: `token ${ghToken}` }
-      });
-      const shaData = await shaRes.json();
-
-      // Push new content
-      const pushRes = await fetch(`https://api.github.com/repos/${REPO}/contents/content.json`, {
-        method: 'PUT',
-        headers: {
-          Authorization: `token ${ghToken}`,
-          Accept: 'application/vnd.github+json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          message: 'Admin panel: içerik güncellendi',
-          content: encoded,
-          sha: shaData.sha
-        })
-      });
-
-      if (pushRes.ok) {
-        content = newContent;
-        status.className = 'save-status success';
-        status.textContent = '✅ Başarıyla kaydedildi! Site 1-2 dakika içinde güncellenir.';
-      } else {
-        throw new Error('GitHub API hatası');
-      }
-    } catch (e) {
-      status.className = 'save-status error';
-      status.textContent = '❌ Hata: ' + e.message;
-    }
-    btn.disabled = false;
-  }
-
   function showPanel(id, el) {
     document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
     document.getElementById('panel-' + id).classList.add('active');
     el.classList.add('active');
   }
-
-  // Auto-login if token in session
-  window.addEventListener('DOMContentLoaded', async () => {
-    const saved = sessionStorage.getItem('be_token');
-    if (saved) {
-      ghToken = saved;
-      document.getElementById('loginScreen').style.display = 'none';
-      document.getElementById('adminScreen').style.display = 'block';
-      await loadContent();
-    }
-  });
 </script>
 </body>
 </html>
