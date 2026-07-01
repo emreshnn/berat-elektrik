@@ -1385,6 +1385,79 @@
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./sw.js').catch(() => {});
   }
+
+  /* ═══ CONTENT.JSON HYDRATION ═══ */
+  (function() {
+    const colorMap = {
+      cyan:   { bg:'rgba(0,229,255,.15)',   border:'rgba(0,229,255,.3)',   color:'#00E5FF' },
+      purple: { bg:'rgba(153,68,255,.15)',  border:'rgba(153,68,255,.3)',  color:'#9944FF' },
+      blue:   { bg:'rgba(68,119,255,.15)',  border:'rgba(68,119,255,.3)',  color:'#4477FF' },
+    };
+    fetch('./content.json?v=' + Date.now())
+      .then(r => r.json())
+      .then(c => {
+        // Gallery
+        const gcards = document.querySelectorAll('.gcard');
+        c.gallery.forEach((item, i) => {
+          if (!gcards[i]) return;
+          const img = gcards[i].querySelector('img');
+          if (img) { img.src = item.img; img.alt = item.title; }
+          const t = gcards[i].querySelector('.gcard-title');
+          const d = gcards[i].querySelector('.gcard-desc');
+          const tg = gcards[i].querySelector('.gcard-tag');
+          if (t) t.textContent = item.title;
+          if (d) d.textContent = item.desc;
+          if (tg) tg.textContent = item.tag;
+        });
+
+        // Services
+        const snames = document.querySelectorAll('.service-name');
+        c.services.forEach((item, i) => { if (snames[i]) snames[i].textContent = item.name; });
+
+        // Reviews
+        const rcards = document.querySelectorAll('.review-card');
+        c.reviews.forEach((item, i) => {
+          if (!rcards[i]) return;
+          const av = rcards[i].querySelector('.review-avatar');
+          const nm = rcards[i].querySelector('.review-name');
+          const tx = rcards[i].querySelector('.review-text');
+          const dt = rcards[i].querySelector('.review-date');
+          const col = colorMap[item.color] || colorMap.cyan;
+          if (av) { av.textContent = item.initial; av.style.cssText = `background:${col.bg};border:1.5px solid ${col.border};color:${col.color};`; }
+          if (nm) nm.textContent = item.name;
+          if (tx) tx.textContent = item.text;
+          if (dt) dt.textContent = item.date;
+        });
+
+        // About
+        const aboutP = document.querySelector('.about-card p');
+        if (aboutP) aboutP.textContent = c.about.text;
+        const stats = document.querySelectorAll('.stat-num');
+        if (stats[0]) stats[0].textContent = c.about.years;
+        if (stats[1]) stats[1].textContent = c.about.jobs;
+
+        // FAQ
+        const faqItems = document.querySelectorAll('.faq-item');
+        c.faq.forEach((item, i) => {
+          if (!faqItems[i]) return;
+          const q = faqItems[i].querySelector('.faq-q');
+          const a = faqItems[i].querySelector('.faq-a');
+          if (q) q.innerHTML = item.q + ' <span class="faq-icon">+</span>';
+          if (a) a.textContent = item.a;
+        });
+
+        // Phone / WhatsApp
+        const phones = document.querySelectorAll('.contact-num');
+        if (phones[0]) phones[0].textContent = c.phone1;
+        if (phones[1]) phones[1].textContent = c.phone2;
+        const waLinks = document.querySelectorAll('a[href*="wa.me"]');
+        waLinks.forEach(a => a.href = 'https://wa.me/' + c.whatsapp);
+        const telLinks = document.querySelectorAll('a[href^="tel:"]');
+        if (telLinks[0]) telLinks[0].href = 'tel:' + c.phone1.replace(/\s/g,'');
+        if (telLinks[1]) telLinks[1].href = 'tel:' + c.phone2.replace(/\s/g,'');
+      })
+      .catch(() => {});
+  })();
 </script>
 </body>
 </html>
