@@ -1,0 +1,40 @@
+{
+  "phone1": "0505 977 06 48",
+  "phone2": "0544 944 90 17",
+  "whatsapp": "905059770648",
+  "hero": {
+    "tagline": "GÜVENLİK · KALİTE · UZMANLIK"
+  },
+  "services": [
+    { "name": "KAMERA KURULUMU VE MONTAJI" },
+    { "name": "AVİZE MONTAJI" },
+    { "name": "ELEKTRİK ARIZA VE TESİSAT" },
+    { "name": "UYDU ÇANAK KURULUMU" }
+  ],
+  "gallery": [
+    { "img": "https://images.unsplash.com/photo-1529265895721-65945a176cff?w=500&h=200&fit=crop&q=80&auto=format", "title": "KAMERA KURULUMU", "desc": "İç/dış mekan IP kamera montajı ve kablolama", "tag": "GÜVENLİK" },
+    { "img": "https://images.unsplash.com/photo-1566417110090-6b15a06ec800?w=500&h=200&fit=crop&q=80&auto=format", "title": "ELEKTRİK PANOSU", "desc": "Sigorta kutusu montajı ve devre hatları", "tag": "TESİSAT" },
+    { "img": "https://images.unsplash.com/photo-1757619852446-5a21e996c685?w=500&h=200&fit=crop&q=80&auto=format", "title": "AVİZE MONTAJI", "desc": "Tavan aydınlatma ve avize kurulumu", "tag": "AYDINLATMA" },
+    { "img": "https://images.unsplash.com/photo-1761795111868-4851b056cf63?w=500&h=200&fit=crop&q=80&auto=format", "title": "UYDU ÇANAK KURULUMU", "desc": "Çanak anten montajı ve alıcı ayarı", "tag": "UYDU" },
+    { "img": "https://images.unsplash.com/photo-1671914492246-a1a7da242223?w=500&h=200&fit=crop&q=80&auto=format", "title": "DIŞ MEKAN AYDINLATMA", "desc": "Bahçe, cephe ve yol aydınlatma sistemleri", "tag": "AYDINLATMA" },
+    { "img": "https://images.unsplash.com/photo-1601955431428-493574b30333?w=500&h=200&fit=crop&q=80&auto=format", "title": "ELEKTRİK TESİSAT", "desc": "Komple tesisat yenileme ve tadilat işleri", "tag": "TESİSAT" }
+  ],
+  "reviews": [
+    { "name": "Ahmet K.", "initial": "A", "color": "cyan", "date": "Mart 2025", "text": "Çok hızlı geldiler, sorunu kısa sürede çözdüler. Fiyatlar makul, işçilik temiz. Kesinlikle tavsiye ederim." },
+    { "name": "Fatma D.", "initial": "F", "color": "purple", "date": "Şubat 2025", "text": "Kamera sistemimi kurdular, çok memnunum. Profesyonel ekip, temiz iş yapıyorlar. Teşekkürler!" },
+    { "name": "Mehmet Y.", "initial": "M", "color": "blue", "date": "Ocak 2025", "text": "Gece elektrik arızası yaşadık, aynı gece geldiler. 7/24 dedikleri gerçekten doğru, çok teşekkürler." },
+    { "name": "Zeynep A.", "initial": "Z", "color": "cyan", "date": "Aralık 2024", "text": "Avize montajı için çağırdım. Hem hızlı hem de çok temiz çalıştılar. Fiyat performans gayet iyi." }
+  ],
+  "about": {
+    "text": "Berat Elektrik olarak Ankara'da elektrik hizmetleri sunuyoruz. Kamera sistemleri, avize montajı, elektrik arıza tesisat ve uydu çanak kurulumunda müşteri memnuniyetini ön planda tutuyoruz. Her işte güvenlik, kalite ve temiz işçiliği ilke ediniyoruz.",
+    "years": "5+",
+    "jobs": "300+"
+  },
+  "faq": [
+    { "q": "Acil arızalarda ne kadar sürede geliyorsunuz?", "a": "Ankara içinde genellikle 1–2 saat içinde ulaşıyoruz. 7/24 acil servis hattımızdan ulaşabilirsiniz." },
+    { "q": "Hangi ilçelere hizmet veriyorsunuz?", "a": "Ankara'nın tüm ilçelerine hizmet veriyoruz. Çankaya, Keçiören, Mamak, Altındağ, Etimesgut, Sincan ve diğer ilçelerde aktif olarak çalışıyoruz." },
+    { "q": "Fatura kesiyor musunuz?", "a": "Evet, talep halinde e-arşiv fatura düzenliyoruz. Bireysel ve kurumsal müşterilerimize fatura kesilmektedir." },
+    { "q": "Kamera sistemleri için garanti veriyor musunuz?", "a": "Kurulum işçiliğimize 1 yıl, kullanılan ürünlere üretici garantisi kapsamında garanti veriyoruz." },
+    { "q": "Ödeme seçenekleriniz neler?", "a": "Nakit, havale/EFT ve kredi kartı ile ödeme kabul ediyoruz. Ödeme iş bitiminde yapılmaktadır." }
+  ]
+}
