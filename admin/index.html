@@ -94,10 +94,23 @@
     .save-status.error { color: var(--red); }
     .save-status.loading { color: var(--muted); }
 
+    /* ── MOBİL TAB BAR ── */
+    .mobile-tabs { display: none; overflow-x: auto; background: var(--dark); border-bottom: 1px solid var(--border); padding: 0 8px; white-space: nowrap; -webkit-overflow-scrolling: touch; }
+    .mobile-tabs::-webkit-scrollbar { display: none; }
+    .mobile-tab { display: inline-flex; align-items: center; gap: 6px; padding: 12px 14px; font-size: 0.78rem; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; }
+    .mobile-tab.active { color: var(--cyan); border-bottom-color: var(--cyan); }
+
     @media (max-width: 768px) {
       .sidebar { display: none; }
+      .mobile-tabs { display: flex; }
       .form-row { grid-template-columns: 1fr; }
       .admin-main { padding: 16px; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .save-bar { padding: 12px 16px; }
+      .btn-save { padding: 10px 20px; font-size: 0.85rem; }
+      .save-status { font-size: 0.78rem; }
+      .admin-header { padding: 12px 16px; }
+      .admin-logo-text { font-size: 0.9rem; }
     }
   </style>
 </head>
@@ -135,6 +148,16 @@
       <span class="admin-badge">ADMİN</span>
     </div>
     <button class="btn-logout" onclick="doLogout()">Çıkış Yap</button>
+  </div>
+
+  <!-- MOBİL TAB BAR -->
+  <div class="mobile-tabs">
+    <div class="mobile-tab active" onclick="showPanel('galeri',this)">🖼️ Galeri</div>
+    <div class="mobile-tab" onclick="showPanel('hizmetler',this)">⚡ Hizmetler</div>
+    <div class="mobile-tab" onclick="showPanel('yorumlar',this)">⭐ Yorumlar</div>
+    <div class="mobile-tab" onclick="showPanel('hakkimizda',this)">ℹ️ Hakkımızda</div>
+    <div class="mobile-tab" onclick="showPanel('sss',this)">❓ SSS</div>
+    <div class="mobile-tab" onclick="showPanel('iletisim',this)">📞 İletişim</div>
   </div>
 
   <div class="admin-body">
@@ -462,9 +485,12 @@
 
   function showPanel(id, el) {
     document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+    document.querySelectorAll('.sidebar-link, .mobile-tab').forEach(l => l.classList.remove('active'));
     document.getElementById('panel-' + id).classList.add('active');
-    el.classList.add('active');
+    /* activate all matching triggers (sidebar + mobile tab) */
+    document.querySelectorAll('.sidebar-link, .mobile-tab').forEach(l => {
+      if (l.getAttribute('onclick') && l.getAttribute('onclick').includes(`'${id}'`)) l.classList.add('active');
+    });
   }
 </script>
 </body>
