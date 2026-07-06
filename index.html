@@ -1402,22 +1402,35 @@
 
     if (firebaseConfig.apiKey === 'BURAYA_API_KEY') return; /* config henüz girilmemiş */
 
+    /* Galeri kartları anında tıklanabilir (Firebase yüklenmese bile) */
+    document.querySelectorAll('.gcard').forEach((card, i) => {
+      card.style.cursor = 'pointer';
+      card.onclick = () => { window.location.href = 'hizmet.html?id=' + i; };
+    });
+
     const colorMap = {
       cyan:   { bg:'rgba(0,229,255,.15)',  border:'rgba(0,229,255,.3)',  color:'#00E5FF' },
       purple: { bg:'rgba(153,68,255,.15)', border:'rgba(153,68,255,.3)', color:'#9944FF' },
       blue:   { bg:'rgba(68,119,255,.15)', border:'rgba(68,119,255,.3)', color:'#4477FF' },
     };
 
-    function applyContent(c) {
+    function applyContent(c, galleryImages) {
+      galleryImages = galleryImages || {};
       /* Gallery */
       document.querySelectorAll('.gcard').forEach((card, i) => {
         if (!c.gallery[i]) return;
         const item = c.gallery[i];
+        /* kapak = o hizmetin ilk görseli (yeni yapı), yoksa eski tek görsel */
+        const imgs = galleryImages[i] || (item.img ? [item.img] : []);
+        const cover = imgs[0] || item.img || '';
         const img = card.querySelector('img');
-        if (img) { img.src = item.img; img.alt = item.title; }
+        if (img && cover) { img.src = cover; img.alt = item.title; }
         const t = card.querySelector('.gcard-title'); if (t) t.textContent = item.title;
         const d = card.querySelector('.gcard-desc');  if (d) d.textContent = item.desc;
         const tg = card.querySelector('.gcard-tag');  if (tg) tg.textContent = item.tag;
+        /* Karta tıklayınca detay sayfası açılsın */
+        card.style.cursor = 'pointer';
+        card.onclick = () => { window.location.href = 'hizmet.html?id=' + i; };
       });
       /* Services */
       document.querySelectorAll('.service-name').forEach((el, i) => {
@@ -1475,9 +1488,15 @@
       try {
         if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
-        db.collection('site').doc('content').get()
-          .then(snap => { if (snap.exists) applyContent(snap.data()); })
-          .catch(() => {});
+        Promise.all([
+          db.collection('site').doc('content').get(),
+          db.collection('gallery').get().catch(() => null)
+        ]).then(([snap, gsnap]) => {
+          if (!snap.exists) return;
+          const galleryImages = {};
+          if (gsnap) gsnap.forEach(d => { galleryImages[d.id] = (d.data().images) || []; });
+          applyContent(snap.data(), galleryImages);
+        }).catch(() => {});
       } catch(e) {}
     }
   })();
