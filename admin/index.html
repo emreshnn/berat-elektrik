@@ -81,6 +81,16 @@
     .img-upload-btn:hover { background: rgba(0,229,255,.15); }
     .img-upload-input { display: none; }
     .img-uploading { opacity: .5; pointer-events: none; }
+    /* Çoklu görsel şeridi */
+    .gallery-imgs { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 8px; margin-bottom: 10px; }
+    .gimg-thumb { position: relative; aspect-ratio: 1; border-radius: 6px; overflow: hidden; border: 1px solid var(--border); background: var(--dark); }
+    .gimg-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .gimg-cover-badge { position: absolute; top: 3px; left: 3px; background: var(--cyan); color: #000; font-size: 0.55rem; font-weight: 700; letter-spacing: .5px; padding: 2px 5px; border-radius: 4px; }
+    .gimg-remove { position: absolute; top: 3px; right: 3px; width: 18px; height: 18px; background: rgba(239,68,68,.9); color: #fff; border: none; border-radius: 50%; font-size: 0.75rem; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .gimg-make-cover { position: absolute; bottom: 3px; left: 3px; right: 3px; background: rgba(0,0,0,.6); color: var(--cyan); border: none; font-size: 0.55rem; padding: 2px; border-radius: 4px; cursor: pointer; letter-spacing: .5px; }
+    .gimg-add { aspect-ratio: 1; border: 1.5px dashed rgba(0,229,255,.35); border-radius: 6px; background: rgba(0,229,255,.06); color: var(--cyan); font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .gimg-add:hover { background: rgba(0,229,255,.14); }
+    .gimg-hint { font-size: 0.68rem; color: var(--muted); margin-bottom: 10px; }
     .review-card-edit, .faq-card-edit { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 14px; }
     .sub-title { font-size: 0.72rem; color: var(--cyan); letter-spacing: 2px; font-weight: 700; margin-bottom: 12px; }
 
@@ -261,6 +271,7 @@
   const db   = firebase.firestore();
 
   let content = {};
+  let galleryImages = []; /* her hizmetin görsel dizisi: [[img,img], [img], ...] — [0]=kapak */
 
   /* ── GİRİŞ ── */
   async function doLogin() {
@@ -309,6 +320,27 @@
       content = await res.json();
       await db.collection('site').doc('content').set(content);
     }
+
+    /* Galeri görsellerini ayrı dokümanlardan yükle */
+    const gmap = {};
+    try {
+      const gsnap = await db.collection('gallery').get();
+      gsnap.forEach(d => { gmap[d.id] = (d.data().images) || []; });
+    } catch (e) {}
+
+    galleryImages = [];
+    content.gallery.forEach((item, i) => {
+      if (gmap[i] && gmap[i].length) {
+        galleryImages[i] = gmap[i].slice();          /* yeni yapı */
+      } else if (item.img) {
+        galleryImages[i] = [item.img];               /* eski tek görseli taşı */
+      } else {
+        galleryImages[i] = [];
+      }
+      if (item.detail === undefined) item.detail = '';/* uzun açıklama alanı */
+      delete item.img;                               /* eski alanı içerikten çıkar */
+    });
+
     renderAll();
   }
 
@@ -322,16 +354,24 @@
     try {
       const newContent = collectContent();
 
-      /* Firestore doküman limiti 1 MB — güvenli sınır 950 KB */
-      const sizeBytes = new Blob([JSON.stringify(newContent)]).size;
-      if (sizeBytes > 950000) {
-        status.className = 'save-status error';
-        status.textContent = `⚠️ Görseller çok büyük (${(sizeBytes/1024/1024).toFixed(2)} MB). Lütfen bir önceki görseli değiştirmeden önce daha küçük fotoğraf seçin.`;
-        btn.disabled = false;
-        return;
+      /* Her hizmetin görsel dokümanı Firestore 1MB limitine uymalı */
+      for (let i = 0; i < galleryImages.length; i++) {
+        const bytes = new Blob([JSON.stringify({ images: galleryImages[i] })]).size;
+        if (bytes > 950000) {
+          status.className = 'save-status error';
+          status.textContent = `⚠️ "${newContent.gallery[i].title}" hizmetindeki görseller çok büyük (${(bytes/1024/1024).toFixed(2)} MB). Birkaç görseli silin veya daha az görsel ekleyin.`;
+          btn.disabled = false;
+          return;
+        }
       }
 
+      /* Metin içeriği (küçük) */
       await db.collection('site').doc('content').set(newContent);
+      /* Her hizmetin görselleri ayrı dokümanda */
+      for (let i = 0; i < galleryImages.length; i++) {
+        await db.collection('gallery').doc(String(i)).set({ images: galleryImages[i] });
+      }
+
       content = newContent;
       status.className = 'save-status success';
       status.textContent = '✅ Kaydedildi! Site anında güncellendi.';
@@ -355,52 +395,88 @@
   function renderGallery() {
     document.getElementById('galleryCards').innerHTML = content.gallery.map((item, i) => `
       <div class="edit-card" id="gcard-${i}">
-        <div class="edit-card-header">GALERİ ${i + 1}</div>
+        <div class="edit-card-header">HİZMET ${i + 1}</div>
         <div class="edit-card-body">
-          <img class="img-preview" id="gprev-${i}" src="${item.img}" onerror="this.src=''" />
-          <label class="img-upload-btn" for="gfile-${i}">📷 Görsel Seç / Değiştir</label>
-          <input type="file" class="img-upload-input" id="gfile-${i}" accept="image/*" onchange="handleImgUpload(${i}, this)" />
+          <div class="form-label">GÖRSELLER (ilk görsel = kapak)</div>
+          <div class="gallery-imgs" id="gimgs-${i}"></div>
+          <div class="gimg-hint">İlk görsel galeri kartında kapak olarak görünür. Diğerleri detay sayfasında listelenir.</div>
+          <input type="file" class="img-upload-input" id="gfile-${i}" accept="image/*" multiple onchange="handleImgUpload(${i}, this)" />
           <div class="form-group">
             <label class="form-label">BAŞLIK</label>
-            <input type="text" class="form-input" id="gtitle-${i}" value="${item.title}" />
+            <input type="text" class="form-input" id="gtitle-${i}" value="${(item.title||'').replace(/"/g,'&quot;')}" />
           </div>
           <div class="form-group">
-            <label class="form-label">AÇIKLAMA</label>
-            <input type="text" class="form-input" id="gdesc-${i}" value="${item.desc}" />
+            <label class="form-label">KISA AÇIKLAMA (kart altında)</label>
+            <input type="text" class="form-input" id="gdesc-${i}" value="${(item.desc||'').replace(/"/g,'&quot;')}" />
           </div>
           <div class="form-group">
             <label class="form-label">ETİKET</label>
-            <input type="text" class="form-input" id="gtag-${i}" value="${item.tag}" />
+            <input type="text" class="form-input" id="gtag-${i}" value="${(item.tag||'').replace(/"/g,'&quot;')}" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">DETAY AÇIKLAMA (tıklanınca açılan sayfada)</label>
+            <textarea class="form-textarea" id="gdetail-${i}" rows="4" placeholder="Bu hizmet hakkında detaylı bilgi...">${item.detail||''}</textarea>
           </div>
         </div>
       </div>`).join('');
+    content.gallery.forEach((_, i) => renderGalleryImgs(i));
+  }
+
+  function renderGalleryImgs(i) {
+    const strip = document.getElementById(`gimgs-${i}`);
+    if (!strip) return;
+    const imgs = galleryImages[i] || [];
+    strip.innerHTML = imgs.map((src, j) => `
+      <div class="gimg-thumb">
+        <img src="${src}" />
+        ${j === 0 ? '<span class="gimg-cover-badge">KAPAK</span>' : `<button class="gimg-make-cover" onclick="makeCover(${i},${j})">Kapak yap</button>`}
+        <button class="gimg-remove" onclick="removeGalleryImage(${i},${j})">×</button>
+      </div>`).join('') +
+      `<label class="gimg-add" for="gfile-${i}">+</label>`;
   }
 
   function handleImgUpload(i, input) {
-    const file = input.files[0];
-    if (!file) return;
+    const files = Array.from(input.files || []);
+    if (!files.length) return;
     const card = document.getElementById(`gcard-${i}`);
     card.classList.add('img-uploading');
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      const img = new Image();
-      img.onload = function() {
-        const canvas = document.createElement('canvas');
-        /* Galeri thumbnail'i sitede ~500px genişlikte gösteriliyor;
-           600px + 0.7 kalite ~100KB → 6 görsel toplam ~600KB, 1MB limitinin altında */
-        const MAX = 600;
-        let w = img.width, h = img.height;
-        if (w > MAX) { h = Math.round(h * MAX / w); w = MAX; }
-        canvas.width = w; canvas.height = h;
-        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-        const dataUrl = canvas.toDataURL('image/jpeg', 0.7);
-        document.getElementById(`gprev-${i}`).src = dataUrl;
-        content.gallery[i].img = dataUrl;
-        card.classList.remove('img-uploading');
+    let remaining = files.length;
+    files.forEach(file => {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement('canvas');
+          /* Detay sayfası görselleri: max 800px, kalite 0.72 → ~130KB;
+             her hizmet ayrı Firestore dokümanında (1MB) → ~6-7 görsele yer var */
+          const MAX = 800;
+          let w = img.width, h = img.height;
+          if (w > MAX) { h = Math.round(h * MAX / w); w = MAX; }
+          canvas.width = w; canvas.height = h;
+          canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+          const dataUrl = canvas.toDataURL('image/jpeg', 0.72);
+          galleryImages[i].push(dataUrl);
+          if (--remaining === 0) {
+            renderGalleryImgs(i);
+            card.classList.remove('img-uploading');
+          }
+        };
+        img.src = e.target.result;
       };
-      img.src = e.target.result;
-    };
-    reader.readAsDataURL(file);
+      reader.readAsDataURL(file);
+    });
+    input.value = ''; /* aynı dosyayı tekrar seçebilmek için sıfırla */
+  }
+
+  function removeGalleryImage(i, j) {
+    galleryImages[i].splice(j, 1);
+    renderGalleryImgs(i);
+  }
+
+  function makeCover(i, j) {
+    const img = galleryImages[i].splice(j, 1)[0];
+    galleryImages[i].unshift(img); /* seçileni başa al → kapak olur */
+    renderGalleryImgs(i);
   }
 
   function renderServices() {
@@ -471,10 +547,10 @@
       hero:      content.hero,
       services:  content.services.map((_, i) => ({ name: document.getElementById(`sname-${i}`).value })),
       gallery:   content.gallery.map((item, i) => ({
-        img:   item.img,
-        title: document.getElementById(`gtitle-${i}`).value,
-        desc:  document.getElementById(`gdesc-${i}`).value,
-        tag:   document.getElementById(`gtag-${i}`).value,
+        title:  document.getElementById(`gtitle-${i}`).value,
+        desc:   document.getElementById(`gdesc-${i}`).value,
+        tag:    document.getElementById(`gtag-${i}`).value,
+        detail: document.getElementById(`gdetail-${i}`).value,
       })),
       reviews: content.reviews.map((item, i) => ({
         name:    document.getElementById(`rname-${i}`).value,
