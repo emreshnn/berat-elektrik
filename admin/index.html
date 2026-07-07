@@ -354,17 +354,21 @@
     try {
       const newContent = collectContent();
 
-      /* Her hizmetin görsel dokümanı Firestore 1MB limitine uymalı */
+      /* Her hizmetin görsellerini limite sığdır (gerekirse otomatik küçült) */
+      status.textContent = 'Görseller hazırlanıyor...';
       for (let i = 0; i < galleryImages.length; i++) {
-        const bytes = new Blob([JSON.stringify({ images: galleryImages[i] })]).size;
-        if (bytes > 950000) {
+        const res = await fitUnderLimit(galleryImages[i]);
+        galleryImages[i] = res.imgs;
+        if (res.size > 950000) {
           status.className = 'save-status error';
-          status.textContent = `⚠️ "${newContent.gallery[i].title}" hizmetindeki görseller çok büyük (${(bytes/1024/1024).toFixed(2)} MB). Birkaç görseli silin veya daha az görsel ekleyin.`;
+          status.textContent = `⚠️ "${newContent.gallery[i].title}" hizmetinde çok fazla görsel var. Lütfen birkaç görseli silin (bu hizmete ~15 görsel sığar).`;
+          renderGalleryImgs(i);
           btn.disabled = false;
           return;
         }
       }
 
+      status.textContent = 'Kaydediliyor...';
       /* Metin içeriği (küçük) */
       await db.collection('site').doc('content').set(newContent);
       /* Her hizmetin görselleri ayrı dokümanda */
@@ -373,6 +377,7 @@
       }
 
       content = newContent;
+      renderGallery();
       status.className = 'save-status success';
       status.textContent = '✅ Kaydedildi! Site anında güncellendi.';
     } catch (e) {
@@ -447,14 +452,15 @@
         const img = new Image();
         img.onload = function() {
           const canvas = document.createElement('canvas');
-          /* Detay sayfası görselleri: max 800px, kalite 0.72 → ~130KB;
-             her hizmet ayrı Firestore dokümanında (1MB) → ~6-7 görsele yer var */
-          const MAX = 800;
+          /* Web galerisi için optimize: max 640px, kalite 0.64 → ~55-70KB/görsel.
+             Her hizmet ayrı Firestore dokümanında (1MB) → hizmet başına ~15 görsele yer var.
+             Orijinal foto ne kadar büyük olursa olsun (5MB, 10MB) burada küçültülür. */
+          const MAX = 640;
           let w = img.width, h = img.height;
           if (w > MAX) { h = Math.round(h * MAX / w); w = MAX; }
           canvas.width = w; canvas.height = h;
           canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-          const dataUrl = canvas.toDataURL('image/jpeg', 0.72);
+          const dataUrl = canvas.toDataURL('image/jpeg', 0.64);
           galleryImages[i].push(dataUrl);
           if (--remaining === 0) {
             renderGalleryImgs(i);
@@ -471,6 +477,39 @@
   function removeGalleryImage(i, j) {
     galleryImages[i].splice(j, 1);
     renderGalleryImgs(i);
+  }
+
+  /* Bir base64 görseli daha küçük boyut/kalitede yeniden sıkıştır (limit için) */
+  function recompress(dataUrl, maxW, quality) {
+    return new Promise(resolve => {
+      if (!dataUrl.startsWith('data:')) { resolve(dataUrl); return; } /* URL ise dokunma */
+      const img = new Image();
+      img.onload = function() {
+        const canvas = document.createElement('canvas');
+        let w = img.width, h = img.height;
+        if (w > maxW) { h = Math.round(h * maxW / w); w = maxW; }
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        try { resolve(canvas.toDataURL('image/jpeg', quality)); }
+        catch (e) { resolve(dataUrl); }
+      };
+      img.onerror = () => resolve(dataUrl);
+      img.src = dataUrl;
+    });
+  }
+
+  /* Bir hizmetin görselleri 1MB'ı aşarsa kademeli küçültüp sığdır */
+  async function fitUnderLimit(imgs) {
+    const LIMIT = 950000;
+    let out = imgs.slice();
+    const steps = [[600,0.6],[520,0.55],[440,0.5],[380,0.45]];
+    let size = new Blob([JSON.stringify({ images: out })]).size;
+    for (let s = 0; s < steps.length && size > LIMIT; s++) {
+      const [mw, q] = steps[s];
+      out = await Promise.all(out.map(src => recompress(src, mw, q)));
+      size = new Blob([JSON.stringify({ images: out })]).size;
+    }
+    return { imgs: out, size };
   }
 
   function makeCover(i, j) {
