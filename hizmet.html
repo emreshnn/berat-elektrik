@@ -4,7 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hizmet Detayı – Berat Elektrik</title>
-  <meta name="description" content="Berat Elektrik hizmet detayı ve çalışma görselleri. Ankara 7/24 elektrik hizmetleri." />
+  <meta name="description" id="metaDesc" content="Berat Elektrik hizmet detayı ve çalışma görselleri. Ankara'da 7/24 elektrik hizmetleri, kamera kurulumu, avize montajı, elektrik arıza." />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Berat Elektrik" />
+  <link rel="canonical" id="canonicalLink" href="https://beratelektrik06.com.tr/hizmet.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Berat Elektrik" />
+  <meta property="og:locale" content="tr_TR" />
+  <meta property="og:title" id="ogTitle" content="Berat Elektrik – Hizmet Detayı" />
+  <meta property="og:description" id="ogDesc" content="Ankara'da 7/24 elektrik hizmetleri." />
+  <meta property="og:url" id="ogUrl" content="https://beratelektrik06.com.tr/hizmet.html" />
+  <meta property="og:image" id="ogImage" content="https://images.unsplash.com/photo-1566417110090-6b15a06ec800?w=1200&q=80" />
+  <meta name="twitter:card" content="summary_large_image" />
 
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -197,11 +210,55 @@
     const item = c.gallery && c.gallery[id];
     if (!item) { document.getElementById('detTitle').textContent = 'Hizmet bulunamadı'; return; }
 
-    document.title = item.title + ' – Berat Elektrik';
+    document.title = item.title + ' – Berat Elektrik Ankara';
     document.getElementById('detTag').textContent = item.tag || 'HİZMET';
     document.getElementById('detTitle').textContent = item.title || '';
     document.getElementById('detDesc').textContent = item.desc || '';
     document.getElementById('detDetail').textContent = item.detail || '';
+
+    /* ── Dinamik SEO ── */
+    const pageUrl = 'https://beratelektrik06.com.tr/hizmet.html?id=' + id;
+    const metaText = (item.detail && item.detail.trim())
+      ? item.detail.trim().slice(0, 155)
+      : (item.title + ' – ' + (item.desc || '') + ' Berat Elektrik Ankara, 7/24 hizmet.').slice(0, 155);
+    const setMeta = (elId, val) => { const el = document.getElementById(elId); if (el) el.setAttribute(el.tagName === 'LINK' ? 'href' : 'content', val); };
+    setMeta('metaDesc', metaText);
+    setMeta('canonicalLink', pageUrl);
+    setMeta('ogTitle', item.title + ' – Berat Elektrik');
+    setMeta('ogDesc', metaText);
+    setMeta('ogUrl', pageUrl);
+
+    /* Schema.org: Service + Breadcrumb */
+    const ld = {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": item.title,
+      "serviceType": item.title,
+      "description": metaText,
+      "areaServed": { "@type": "City", "name": "Ankara" },
+      "provider": {
+        "@type": "Electrician",
+        "name": "Berat Elektrik",
+        "telephone": c.phone1 ? "+9" + c.phone1.replace(/\D/g,'') : "+905059770648",
+        "url": "https://beratelektrik06.com.tr/",
+        "areaServed": "Ankara"
+      },
+      "url": pageUrl
+    };
+    const bc = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Ana Sayfa", "item": "https://beratelektrik06.com.tr/" },
+        { "@type": "ListItem", "position": 2, "name": item.title, "item": pageUrl }
+      ]
+    };
+    [ld, bc].forEach(obj => {
+      const s = document.createElement('script');
+      s.type = 'application/ld+json';
+      s.textContent = JSON.stringify(obj);
+      document.head.appendChild(s);
+    });
 
     /* İletişim numaraları */
     if (c.phone1) {
@@ -215,6 +272,10 @@
 
     /* Görseller: yeni yapı gallery/{id}.images, yoksa eski tek görsel */
     images = (gsnap && gsnap.exists && gsnap.data().images) ? gsnap.data().images : (item.img ? [item.img] : []);
+    /* og:image sadece http(s) kapak varsa (base64 sosyal paylaşımda çalışmaz) */
+    if (images[0] && /^https?:/.test(images[0])) {
+      const oi = document.getElementById('ogImage'); if (oi) oi.setAttribute('content', images[0]);
+    }
     renderImages();
   }).catch(e => {
     document.getElementById('detTitle').textContent = 'Bir hata oluştu';
