@@ -498,16 +498,18 @@
     });
   }
 
-  /* Bir hizmetin görselleri 1MB'ı aşarsa kademeli küçültüp sığdır */
+  /* Bir hizmetin görselleri 1MB'ı aşarsa sığana kadar kademeli küçült.
+     Her denemede ORİJİNAL görsellerden sıkıştırır (kalite üst üste bozulmaz). */
   async function fitUnderLimit(imgs) {
-    const LIMIT = 950000;
+    const LIMIT = 900000; /* 1MB'ın güvenli altı */
     let out = imgs.slice();
-    const steps = [[600,0.6],[520,0.55],[440,0.5],[380,0.45]];
     let size = new Blob([JSON.stringify({ images: out })]).size;
-    for (let s = 0; s < steps.length && size > LIMIT; s++) {
-      const [mw, q] = steps[s];
-      out = await Promise.all(out.map(src => recompress(src, mw, q)));
+    if (size <= LIMIT) return { imgs: out, size };
+    const combos = [[640,0.6],[560,0.55],[480,0.5],[420,0.45],[360,0.42],[320,0.4],[280,0.38]];
+    for (const [mw, q] of combos) {
+      out = await Promise.all(imgs.map(src => recompress(src, mw, q)));
       size = new Blob([JSON.stringify({ images: out })]).size;
+      if (size <= LIMIT) break;
     }
     return { imgs: out, size };
   }
